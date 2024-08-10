@@ -36,7 +36,7 @@ const Header = () => {
                     <img src={clipboard} alt="" />
                         <li className="menus">Tasks</li>
                     </div>
-                    <div className="menu-itens" onClick={() => handleNavigation('/Registes')}>
+                    <div className="menu-itens" onClick={() => handleNavigation('/Registers')}>
                     <img src={adicionar} alt="" />
                         <li className="menus">Registrar User</li>
                     </div>
