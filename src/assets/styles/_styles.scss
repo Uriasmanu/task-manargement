@@ -1,0 +1,19 @@
+// estilos globais
+@import "./styleBase";
+
+
+// paginas
+
+@import "../pages/Login/login";
+@import "../pages/NotFound/notfound";
+@import "../pages/Dashboard/dashbord";
+
+
+
+// componentes
+
+@import "../components/Auth/auth";
+@import "../components/Header/header";
+@import "../components/Projetos/projetos";
+
+

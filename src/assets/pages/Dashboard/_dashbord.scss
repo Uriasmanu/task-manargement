@@ -1,0 +1,254 @@
+@import "../../styles/styleBase";
+
+.container-dashboard{
+    display: flex;
+    gap: 5%;
+    height: 100vh;
+
+    .main{
+        padding: 2% 0%;
+        display: flex;
+        flex-direction: column;
+        gap: 5%;
+        height: 100vh;
+
+        .apresentacao{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+
+            .chamada{
+                display: flex;
+                flex-direction: column;
+                width: 70%;
+                gap: 15px;
+                height: auto;
+            }
+        }
+
+        .container-indicadores{
+            display: flex;
+            justify-content: space-around;
+            border-top: solid 2px rgb(197, 197, 197);
+            border-bottom: solid 2px rgb(197, 197, 197);
+            width: 100%;
+            padding: 2%;
+
+            .indicadores{
+                
+                padding: 1% 3%;
+                display: flex;
+                align-items: center;
+                width: 30%;
+                gap: 10%;
+
+                img{
+                    width: 10%;
+                    height: auto;
+                }
+            }
+
+            .indicadores:nth-child(1){
+                border-right: solid 2px rgb(197, 197, 197) ;
+
+            }
+
+            .indicadores:nth-child(2){
+                border-right: solid 2px rgb(197, 197, 197) ;
+
+            }
+        }
+
+        .card-tempo{
+             display: flex;
+             width: 100%;
+             gap: 10%;
+        .card {
+            width: 320px;
+            background: #fff480;
+            color: black;
+            position: relative;
+            border-radius: 2.5em;
+            padding: 2em;
+            transition: transform 0.4s ease;
+        }
+        
+        .card .card-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 5em;
+            height: 100%;
+            transition: transform 0.4s ease;
+        }
+        
+        .card .card-top, .card .card-bottom {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .card .card-top p, .card .card-top .card-title, .card .card-bottom p, .card .card-bottom .card-title {
+            margin: 0;
+        }
+        
+        .card .card-title {
+            font-weight: bold;
+        }
+        
+        .card .card-top p, .card .card-bottom p {
+            font-weight: 600;
+        }
+        
+        .card .card-bottom {
+            align-items: flex-end;
+        }
+        
+        .card .card-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: grid;
+            place-items: center;
+            pointer-events: none;
+        }
+        
+        .card .card-image svg {
+            width: 4em;
+            height: 4em;
+            transition: transform 0.4s ease;
+        }
+        
+        .card:hover {
+            cursor: pointer;
+            transform: scale(0.97);
+        }
+        
+        .card:hover .card-content {
+            transform: scale(0.96);
+        }
+        
+        .card:hover .card-image svg {
+            transform: scale(1.05);
+        }
+        
+        .card:active {
+            transform: scale(0.9);
+        }
+                    
+  
+        }
+
+    }
+
+    .resumo-tarefas{
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        gap: 18px;
+
+        .cabecalho{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .cards-tarefas{
+            display: flex;
+            justify-content: space-between;
+            background-color: #f2f3f7;
+            border-radius: 0.75em;
+            cursor: pointer;
+            transition: ease 0.2s;
+            box-shadow: 1em 1em 1em rgba(216, 218, 224, 0.6941176471), -0.75em -0.75em 1em #ffffff;
+            border: 1.5px solid #f2f3f7;
+            align-items: center;
+            padding: 0% 2%;
+
+            
+            .card:hover {
+                background-color: #d3ddf1;
+                border: 1.5px solid #1677ff;
+            }
+            
+            .container {
+                margin-top: 1.25em;
+                margin-bottom: 1.375em;
+                margin-right: 2em;
+                display: flex;
+                flex-direction: row;
+                gap: 46px;
+                width: auto;
+            }
+            
+            .status-ind {
+                width: 0.625em;
+                height: 0.625em;
+                background-color: #ff0000;
+                margin: 0.375em 0;
+                border-radius: 0.5em;
+            }
+            
+            .text-wrap {
+                display: flex;
+                flex-direction: column;
+                gap: 0.25em;
+                color: #333;
+            }
+            
+            .time {
+                font-size: 0.875em;
+                color: #777;
+            }
+            
+            .text-link {
+                font-weight: 500;
+                text-decoration: none;
+                color: black;
+            }
+            
+            .button-wrap {
+                display: flex;
+                flex-direction: row;
+                gap: 1em;
+                align-items: center;
+            }
+            
+            .secondary-cta {
+                background-color: transparent;
+                border: none;
+                font-size: 15px;
+                font-weight: 400;
+                color: #666;
+                cursor: pointer;
+            }
+            
+            .primary-cta {
+                font-size: 15px;
+                background-color: transparent;
+                font-weight: 600;
+                color: #1677ff;
+                border: none;
+                border-radius: 1.5em;
+                cursor: pointer;
+            }
+            
+            button:hover {
+                text-decoration: underline;
+            }
+            
+        }
+    }
+
+    .usuario{
+        display: flex;
+    flex-direction: column;
+    padding: 2% 2%;
+    height: 100vh;
+    border-left: solid 1px rgba(221, 221, 221, 0.781);
+    width: 25%;
+    justify-content: space-around;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+    }
+}
