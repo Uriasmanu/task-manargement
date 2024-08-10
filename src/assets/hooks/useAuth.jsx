@@ -19,7 +19,7 @@ const useAuth = () => {
 
   const login = async (username, password) => {
     try {
-      const response = await axios.post('https://localhost:7017/api/user/login', {
+      const response = await axios.post('https://crud-sistem-bvhjadbefdgsarb9.brazilsouth-01.azurewebsites.net/api/conta/login', {
         username,
         password,
       });

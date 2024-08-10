@@ -4,6 +4,8 @@ import logout from '../../imagens/logout.png';
 import clipboard from '../../imagens/clipboard.png';
 import home from '../../imagens/home.png';
 import projectManagement from '../../imagens/projectManagement.png';
+import adicionar from '../../imagens/adicionar.png';
+
 
 const Header = () => {
     return (
@@ -27,6 +29,10 @@ const Header = () => {
                     <div className="menu-itens">
                     <img src={clipboard} alt="" />
                         <li className="menus">Tasks</li>
+                    </div>
+                    <div className="menu-itens">
+                    <img src={adicionar} alt="" />
+                        <li className="menus">Registrar User</li>
                     </div>
 
                 </ul>

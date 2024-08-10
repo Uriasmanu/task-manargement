@@ -1,10 +1,7 @@
 import Auth from '../../components/Auth/auth';
-import Register from '../../components/Register/register';
-import { useLoginContext } from '../../context/LoginContext';
 import './_login.scss';
 
 const Login = () => {
-  const { isLogin, toggleView } = useLoginContext();
 
   return (
     <div className="container-login">
@@ -13,7 +10,7 @@ const Login = () => {
       <p>Organize seu tempo, conquiste seus objetivos!</p>
       </div>
       <div className="login">
-      {isLogin ? <Auth toggleView={toggleView} /> : <Register toggleView={toggleView} />}
+      <Auth/>
       
       </div>
     </div>

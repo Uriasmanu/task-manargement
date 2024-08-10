@@ -1,7 +1,7 @@
 import './_register.scss';
 import PropTypes from 'prop-types';
 
-const Register = ({ toggleView })=> {
+const Register = ()=> {
   return (
     <>
       <form className="form">
@@ -29,7 +29,7 @@ const Register = ({ toggleView })=> {
           
         
         <div className="btn">
-          <button className="button1"  onClick={toggleView}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Registrar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+          <button className="button1" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Registrar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
           <button className="button2">Entrar</button>
         </div>
         <button className="button3">Esqueci a senha</button>
@@ -37,9 +37,5 @@ const Register = ({ toggleView })=> {
     </>
   )
 }
-
-Register.propTypes = {
-  toggleView: PropTypes.func.isRequired,
-};
 
 export default Register;

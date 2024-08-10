@@ -4,7 +4,7 @@ import './_auth.scss';
 import PropTypes from 'prop-types';
 import useAuth from '../../hooks/useAuth';
 
-const Auth = ({ toggleView }) => {
+const Auth = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { login, error } = useAuth();
@@ -51,16 +51,11 @@ const Auth = ({ toggleView }) => {
         {error && <p className="error-message">{error}</p>} {/* Exibindo o erro */}
         <div className="btn">
           <button className="button1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Entrar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-          <button className="button2" onClick={toggleView}>Cadastrar</button>
         </div>
-        <button className="button3">Esqueci a senha</button>
       </form>
     </>
   );
 };
 
-Auth.propTypes = {
-  toggleView: PropTypes.func.isRequired,
-};
 
 export default Auth;
