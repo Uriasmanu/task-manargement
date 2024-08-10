@@ -5,9 +5,15 @@ import clipboard from '../../imagens/clipboard.png';
 import home from '../../imagens/home.png';
 import projectManagement from '../../imagens/projectManagement.png';
 import adicionar from '../../imagens/adicionar.png';
-
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+    const navigate = useNavigate();
+
+    const handleNavigation = (path) => {
+        navigate(path);
+    };
+
     return (
         <div className="container-header">
             <div className='titulo-logo'>
@@ -16,21 +22,21 @@ const Header = () => {
             </div>
             <div>
                 <ul className='menus-container'>
-                    <div className="menu-itens">
+                    <div className="menu-itens"  onClick={() => handleNavigation('/Dashboard')}>
                         <img src={home} alt="" />
                         <li className="menus">Home</li>
                     </div>
 
-                    <div className="menu-itens">
+                    <div className="menu-itens" onClick={() => handleNavigation('/Projects')}>
                     <img src={projectManagement} alt="" />
                         <li className="menus">Projetos</li>
                     </div>
 
-                    <div className="menu-itens">
+                    <div className="menu-itens" onClick={() => handleNavigation('/Tasks')}>
                     <img src={clipboard} alt="" />
                         <li className="menus">Tasks</li>
                     </div>
-                    <div className="menu-itens">
+                    <div className="menu-itens" onClick={() => handleNavigation('/Registes')}>
                     <img src={adicionar} alt="" />
                         <li className="menus">Registrar User</li>
                     </div>

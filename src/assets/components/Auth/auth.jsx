@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './_auth.scss';
-import PropTypes from 'prop-types';
 import useAuth from '../../hooks/useAuth';
 
 const Auth = () => {

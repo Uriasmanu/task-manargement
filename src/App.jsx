@@ -2,11 +2,11 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css'
 import Login from './assets/pages/Login/Login';
 
-import Projects from './assets/pages/Projects';
-import Reports from './assets/pages/Reports';
-import Tasks from './assets/pages/Tasks';
+import Projects from './assets/pages/Projects/Projects';
+import Tasks from './assets/pages/Tasks/Tasks';
 import NotFound from './assets/pages/NotFound/NotFound';
 import Dashboard from './assets/pages/Dashboard/Dashboard';
+import Registers from './assets/pages/Registers/Registers';
 
 
 function App() {
@@ -18,8 +18,8 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Projects" element={<Projects />} />
-        <Route path="/Reports" element={<Reports/>} />
         <Route path="/Tasks" element={<Tasks />} />
+        <Route path="/Projects" element={<Registers/>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
