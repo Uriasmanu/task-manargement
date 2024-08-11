@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const useAuthe = () => {
+const useAuth = () => {
   const [user, setUser] = useState(() => {
     const token = localStorage.getItem('authToken');
     return token ? { token } : null;
@@ -45,4 +45,4 @@ const useAuthe = () => {
   return { user, error, login, logout };
 };
 
-export default useAuthe;
+export default useAuth;
