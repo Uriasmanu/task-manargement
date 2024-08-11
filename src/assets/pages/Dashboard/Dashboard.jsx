@@ -5,11 +5,9 @@ import "./_dashbord.scss"
 import done from '../../imagens/gostar.png';
 import relogio from '../../imagens/relogio.png';
 import aumentar from '../../imagens/aumentar.png';
-import usuario from '../../imagens/usuario.png';
-import Projetos from '../../components/Projetos/Projetos';
 import Dia from '../../components/Dia';
-import Tasks from '../Tasks/Tasks';
-import Tarefa from '../../components/Tasks/Tasks';
+import Tarefa from '../../components/Tarefa/Tarefa';
+import Usuario from '../../components/Usuario/Usuario';
 
 
 const Dashboard = () => {
@@ -87,29 +85,17 @@ const Dashboard = () => {
                 <div className='resumo-tarefas'>
                     <div className='cabecalho'>
                         <h4>Tarefas atuais</h4>
-                        <p>progresso 30%</p>
+                        <p>Tempo Total</p>
                     </div>
                     
+                  <Tarefa/>
+                  <Tarefa/>
                   <Tarefa/>
 
                 </div>
             </div>
 
-            <div className="usuario">
-                <div className='card-imagem-user'>
-                    <img src={usuario} alt="" />
-                </div>
-
-                <div className='contem-projeto'>
-                    <h4>Projetos Atual</h4>
-                    <div className="cards-projetos">
-                        <Projetos/>
-
-                    </div>
-                    <div className="cards-projetos"></div>
-                    <div className="cards-projetos"></div>
-                </div>
-            </div>
+            <Usuario/>
 
         </div >
     )
