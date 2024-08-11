@@ -4,15 +4,15 @@ import './_auth.scss';
 import useAuth from '../../hooks/useAuth';
 
 const Auth = () => {
-  const [username, setUsername] = useState('');
+  const [login, setLogin] = useState('');  // Ajustado para 'login'
   const [password, setPassword] = useState('');
-  const { login, error } = useAuth();
+  const { login: loginUser, error } = useAuth();  // Ajustado para 'loginUser'
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     
-    const success = await login(username, password);
+    const success = await loginUser(login, password);  // Ajustado para 'loginUser'
     
     if (success) {
       navigate('/dashboard');
@@ -31,8 +31,8 @@ const Auth = () => {
             placeholder="Usuario" 
             className="input-field" 
             type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={login}  // Ajustado para 'login'
+            onChange={(e) => setLogin(e.target.value)}  // Ajustado para 'login'
           />
         </div>
         <div className="field">
@@ -44,7 +44,7 @@ const Auth = () => {
             className="input-field"
              type="password"
              value={password}
-            onChange={(e) => setPassword(e.target.value)}
+             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         {error && <p className="error-message">{error}</p>} {/* Exibindo o erro */}
@@ -55,6 +55,5 @@ const Auth = () => {
     </>
   );
 };
-
 
 export default Auth;

@@ -5,50 +5,46 @@ const useAuth = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
-  const register = async (username, password) => {
-    try {
-      const response = await axios.post('https://localhost:7017/api/user/register', {
-        userName: username,
-        password: password,
-      });
-      setUser(response.data);
-    } catch (err) {
-      setError(err.response ? translateError(err.response.data.message) : 'Erro ao registrar usuário.');
-    }
-  };
 
-  const login = async (username, password) => {
+  const login = async (login, password) => {
     try {
-      const response = await axios.post('https://crud-sistem-bvhjadbefdgsarb9.brazilsouth-01.azurewebsites.net/api/conta/login', {
-        username,
-        password,
+      const response = await axios.post('https://localhost:7228/api/conta/login', {
+        Login: login,
+        Password: password,
       });
-
+  
       if (response.status === 200) {
+        const token = response.data.token;
+        localStorage.setItem('authToken', token);
+        setUser({ login, token });
         return true;
       }
     } catch (err) {
       setError(err.response ? translateError(err.response.data.message) : 'Erro ao realizar login.');
     }
-
+  
     return false;
+  };
+  
+  
+
+  const logout = () => {
+
+    localStorage.removeItem('authToken');
+    setUser(null);
   };
 
   const translateError = (message) => {
     switch (message) {
       case 'Invalid username or password.':
         return 'Nome de usuário ou senha inválidos.';
-      // Adicione mais casos conforme necessário
+
       default:
         return message;
     }
   };
 
-  const logout = () => {
-    setUser(null);
-  };
-
-  return { user, error, register, login, logout };
+  return { user, error, login, logout };
 };
 
 export default useAuth;
