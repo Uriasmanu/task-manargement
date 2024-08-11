@@ -6,7 +6,8 @@ import Projects from './assets/pages/Projects/Projects';
 import Tasks from './assets/pages/Tasks/Tasks';
 import NotFound from './assets/pages/NotFound/NotFound';
 import Dashboard from './assets/pages/Dashboard/Dashboard';
-import Registers from './assets/pages/Registers/Registers';
+import Admim from './assets/pages/Admim/Admim';
+
 
 
 
@@ -21,7 +22,7 @@ function App() {
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Projects" element={<Projects />} />
         <Route path="/Tasks" element={<Tasks/>} />
-        <Route path="/Registers" element={<Registers/>} />
+        <Route path="/Admim" element={<Admim/>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
