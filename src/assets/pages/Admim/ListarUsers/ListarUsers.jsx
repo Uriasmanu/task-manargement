@@ -21,6 +21,19 @@ const ListarUsers = () => {
         fetchUsuarios();
     }, []);
 
+    const handleDelete = async (id) => {
+        const confirmDelete = window.confirm('Tem certeza que deseja excluir este usuário?');
+        if (confirmDelete) {
+            try {
+                await axios.delete(`https://localhost:7228/api/Usuario/${id}`);
+                // Atualiza a lista de usuários após a exclusão
+                setUsuarios((prevUsuarios) => prevUsuarios.filter(usuario => usuario.id !== id));
+            } catch (error) {
+                console.error('Erro ao deletar usuário:', error);
+            }
+        }
+    };
+
     return (
         <div className="container-listar">
             <h2>Lista de Usuários</h2>
@@ -33,7 +46,7 @@ const ListarUsers = () => {
                                 <p>{usuario.uuidUserName}</p>
                             </div>
                             <div className="info__close">
-                                <button>
+                                <button onClick={() => handleDelete(usuario.id)}>
                                     <img src={deleteIcon} alt="ícone de deletar" />
                                 </button>
                             </div>
