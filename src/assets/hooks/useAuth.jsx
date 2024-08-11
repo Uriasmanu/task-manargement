@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const useAuth = () => {
-  const [user, setUser] = useState(null);
+const useAuthe = () => {
+  const [user, setUser] = useState(() => {
+    const token = localStorage.getItem('authToken');
+    return token ? { token } : null;
+  });
   const [error, setError] = useState(null);
-
 
   const login = async (login, password) => {
     try {
@@ -12,7 +14,7 @@ const useAuth = () => {
         Login: login,
         Password: password,
       });
-  
+
       if (response.status === 200) {
         const token = response.data.token;
         localStorage.setItem('authToken', token);
@@ -22,14 +24,11 @@ const useAuth = () => {
     } catch (err) {
       setError(err.response ? translateError(err.response.data.message) : 'Erro ao realizar login.');
     }
-  
+
     return false;
   };
-  
-  
 
   const logout = () => {
-
     localStorage.removeItem('authToken');
     setUser(null);
   };
@@ -38,7 +37,6 @@ const useAuth = () => {
     switch (message) {
       case 'Invalid username or password.':
         return 'Nome de usuário ou senha inválidos.';
-
       default:
         return message;
     }
@@ -47,4 +45,4 @@ const useAuth = () => {
   return { user, error, login, logout };
 };
 
-export default useAuth;
+export default useAuthe;
