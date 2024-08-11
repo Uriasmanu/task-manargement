@@ -1,25 +1,51 @@
+import useData from '../../hooks/useData';
 import './_projetos.scss';
+import more from '../../imagens/more.svg';
+import deleteIcon from '../../imagens/delete.svg';
 
 const Projetos = () => {
+    const { infos, handleDelete } = useData({ api: 'Project', deleteEndpoint: 'Project' });
+
+
+    if (!infos) {
+        return <div>Carregando...</div>;
+    }
+
     return (
         <div className='container-projeto'>
             <div className="card">
                 <div className="card__wrapper">
                     <div className="card___wrapper-acounts">
-                        <div className="card__score">+3(quantidade de colaboradores)</div>
-
+                        <div className="card__score">
+                            +{infos.colaboradores} colaboradores
+                        </div>
                     </div>
-                    <div className="card__menu"><svg xmlns="http://www.w3.org/2000/svg" width="4" viewBox="0 0 4 20" height="20" fill="none"><g fill="#000"><path d="m2 4c1.10457 0 2-.89543 2-2s-.89543-2-2-2-2 .89543-2 2 .89543 2 2 2z"></path><path d="m2 12c1.10457 0 2-.8954 2-2 0-1.10457-.89543-2-2-2s-2 .89543-2 2c0 1.1046.89543 2 2 2z"></path><path d="m2 20c1.10457 0 2-.8954 2-2s-.89543-2-2-2-2 .8954-2 2 .89543 2 2 2z"></path></g></svg></div>
+                    <div className='controles'>
+                    <button onClick={() => handleDelete(infos.id)}>
+                            <img src={deleteIcon} alt="ícone de deletar" />
+                        </button>
+                    <div className="card__menu">
+                        
+                        <button>
+                            <img src={more} alt="mais" />
+                        </button>
+                    </div>
+                    </div>
                 </div>
-                <div className="card__title">Web Design templates
-                    Selection (nome do projeto)</div>
-                
-                <div className="card__indicator"><span className="card__indicator-amount">135 (quantidade de tarefas)</span> Tarefas / <span className="card__indicator-percentage">Tempo</span></div>
-              
-
+                <div className="card__title">
+                    {infos.name} (nome do projeto)
+                </div>
+                <div className="card__indicator">
+                    <span className="card__indicator-amount">
+                        {infos.tarefas} tarefas
+                    </span> / 
+                    <span className="card__indicator-percentage">
+                       
+                    </span>
+                </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default Projetos;

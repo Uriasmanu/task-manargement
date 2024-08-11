@@ -1,13 +1,25 @@
 .container-projetos{
     display: flex;
+    box-sizing: border-box;
 
     main{
-        width: 100%;
+        width: 98%;
         height: 100vh;
         padding: 2% 2%;
         display: flex;
         flex-wrap: wrap;
-
+        align-items: center;
         gap: 5%;
+        flex-direction: column;
+        
+
+
+        h2{
+            border-bottom: 1px black solid;
+            width: 98%;
+            text-align: center;
+            padding: 2%;
+            font-size: 1.5rem;
+        }
     }
 }
