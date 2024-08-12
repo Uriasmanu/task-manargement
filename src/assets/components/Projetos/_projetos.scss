@@ -118,6 +118,15 @@
     font-weight: 500;
     font-size: 14px;
     color: var(--main-color);
+
+    p{
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .ver-mai{
+      margin-top: 2%;
+    }
   }
 
   .card__progress progress {

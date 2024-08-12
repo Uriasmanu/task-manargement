@@ -4,7 +4,12 @@ import more from '../../imagens/more.svg';
 import deleteIcon from '../../imagens/delete.svg';
 
 const Projetos = () => {
-    const { infos, handleDelete } = useData({ api: 'Project', deleteEndpoint: 'Project' });
+    const { infos, handleDelete } = useData({ api: 'Project/Active', deleteEndpoint: 'Project/Deleted' });
+
+    if (!infos) {
+        return <div>Carregando...</div>;
+    }
+    console.log(infos);
 
 
     if (!infos) {
@@ -13,37 +18,43 @@ const Projetos = () => {
 
     return (
         <div className='container-projeto'>
-            <div className="card">
-                <div className="card__wrapper">
-                    <div className="card___wrapper-acounts">
-                        <div className="card__score">
-                            +{infos.colaboradores} colaboradores
+            {infos.length > 0 ? (
+                infos.map((project) => (
+                    <div key={project.id} className="card">
+                        <div className="card__wrapper">
+                            <div className="card___wrapper-acounts">
+                                <div className="card__score">
+                                    <p>2 {/*quantidade de colaboradores*/}</p>
+                                </div>
+                            </div>
+                            <div className='controles'>
+                                <button onClick={() => handleDelete(project.id)}>
+                                    <img src={deleteIcon} alt="ícone de deletar" />
+                                </button>
+                                <div className="card__menu">
+                                    <button>
+                                        <img src={more} alt="mais" />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card__title">
+                            {project.name}
+
+                        </div>
+                        <div className="card__indicator">
+
+                            <p>{project.descricao}</p>
+                            <span className="card__indicator-percentage">
+                                <button className="ver-mais">Ver mais...</button>
+                            </span>
                         </div>
                     </div>
-                    <div className='controles'>
-                    <button onClick={() => handleDelete(infos.id)}>
-                            <img src={deleteIcon} alt="ícone de deletar" />
-                        </button>
-                    <div className="card__menu">
-                        
-                        <button>
-                            <img src={more} alt="mais" />
-                        </button>
-                    </div>
-                    </div>
-                </div>
-                <div className="card__title">
-                    {infos.name} (nome do projeto)
-                </div>
-                <div className="card__indicator">
-                    <span className="card__indicator-amount">
-                        {infos.tarefas} tarefas
-                    </span> / 
-                    <span className="card__indicator-percentage">
-                       
-                    </span>
-                </div>
-            </div>
+                ))
+            ) : (
+                <p>Não há usuários cadastrados.</p>
+            )}
+
         </div>
     );
 }

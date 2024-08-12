@@ -1,9 +1,11 @@
 import Header from "../../components/Header/Header";
 import Tarefa from "../../components/Tarefa/Tarefa";
 import Usuario from "../../components/Usuario/Usuario";
+import useData from "../../hooks/useData";
 import './_tasks.scss'
 
 const Tasks = () => {
+    const { infos, handleDelete } = useData({ api: 'Tarefa', deleteEndpoint: 'Tarefa' });
     return (
         <div className="container-tasks">
             <Header />
