@@ -8,6 +8,7 @@
         height: 100vh;
         gap: 5%;
         padding: 2%;
+        align-items: center;
 
         h2{
             font-size: 2.5rem;
@@ -16,6 +17,33 @@
 
         p{
             font-size: 1.5rem;
+        }
+
+        .container-button {
+            display: flex;
+            flex-direction: column;
+            gap: 5%;
+            width: 50%;
+            height: 25%;
+            padding: 5%;
+      
+            .button {
+              padding: 15px 20px;
+              border: none;
+              outline: none;
+              background-color: #151515;
+              color: #eee;
+              border-radius: 7px;
+              font-weight: 600;
+              font-size: 1.5rem;
+              cursor: pointer;
+              transition: all 0.25s ease-out;
+              
+            }
+      
+            .button:hover {
+              transform: translateY(-3px);
+            }
         }
     }
 }

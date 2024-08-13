@@ -44,10 +44,7 @@ const Header = () => {
                 </ul>
             </div>
 
-            <div className='botoes-criar'>
-                <button className='task'>Criar nova Task</button>
-                <button className='project'>Criar novo Projeto</button>
-            </div>
+            
             <div className="sair">
                 <img src={logout} alt="icone de sair" />
                 <button className='logout'>Sair</button>
