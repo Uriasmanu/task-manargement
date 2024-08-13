@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import tarefa from '../../imagens/splitscreen.svg';
 import more from '../../imagens/more.svg';
 import play from '../../imagens/play.svg';
+import BotaoDelete from '../BotaoDelete/BotaoDelete';
 
 const TransformStatus = (status) => {
     switch (status) {
@@ -17,9 +18,9 @@ const TransformStatus = (status) => {
     }
 }
 
-const Tarefa = ({ name, collaborator, status, timetrackers, update }) => {
+const Tarefa = ({ id, name, collaborator, status, timetrackers, update, handleDelete }) => {
     const { className, text } = TransformStatus(status);
-    
+
     return (
         <div className="cards-tarefas">
             <div className="container">
@@ -44,20 +45,24 @@ const Tarefa = ({ name, collaborator, status, timetrackers, update }) => {
             <button>
                 <img src={more} alt="mais" />
             </button>
+            <BotaoDelete
+               handleDelete={handleDelete}
+               objectId={id}
+            />
         </div>
     );
 };
 
 Tarefa.propTypes = {
-
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     collaborator: PropTypes.shape({
         name: PropTypes.string,
-
     }),
     status: PropTypes.number.isRequired,
-    timetrackers: PropTypes.string,
+    timetrackers: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     update: PropTypes.string.isRequired,
+    handleDelete: PropTypes.func.isRequired, 
 };
 
 export default Tarefa;

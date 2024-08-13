@@ -151,6 +151,12 @@
             }
           }
         
+          .lista-de-tarefas{
+            display: flex;
+            flex-direction: column;
+            height: auto;
+            gap: 10px;
+          }
       }
     
       .card__progress progress {

@@ -1,12 +1,13 @@
 import Header from "../../components/Header/Header";
 import Usuario from "../../components/Usuario/Usuario";
 import './_projects.scss'
-import deleteIcon from '../../imagens/delete.svg';
+
 import more from '../../imagens/more.svg';
 import mais from '../../imagens/stat_minus.svg';
 import useData from '../../hooks/useData';
 import Tarefa from "../../components/Tarefa/Tarefa";
 import { useState } from "react";
+import BotaoDelete from "../../components/BotaoDelete/BotaoDelete";
 
 const Projects = () => {
     const { infos, handleDelete } = useData({ api: 'Project/Active', deleteEndpoint: 'Project/Deleted' });
@@ -41,9 +42,10 @@ const Projects = () => {
                                         </div>
                                     </div>
                                     <div className='controles'>
-                                        <button className="botao-delete" onClick={() => handleDelete(project.id)}>
-                                            <img src={deleteIcon} alt="ícone de deletar" />
-                                        </button>
+                                        <BotaoDelete
+                                            handleDelete={handleDelete}
+                                            objectId={project.id}
+                                        />
                                         <div className="card__menu">
                                             <button>
                                                 <img src={more} alt="mais" />
@@ -64,13 +66,14 @@ const Projects = () => {
                                         <span className="lista-de-tarefas">
                                             {project.tarefas.$values.map((tarefa) => (
                                                 <Tarefa
-                                                    key={tarefa.id}
-                                                    id={tarefa.id}
-                                                    name={tarefa.name}
-                                                    collaborator={tarefa.collaborator}
-                                                    status={tarefa.status}
-                                                    timetrackers={tarefa.timetrackers}
-                                                    update={tarefa.updatedAt}
+                                                key={tarefa.id}
+                                                id={tarefa.id}
+                                                name={tarefa.name}
+                                                collaborator={tarefa.collaborator}
+                                                status={tarefa.status}
+                                                timetrackers={tarefa.timetrackers}
+                                                update={tarefa.updatedAt}
+                                                handleDelete={handleDelete}
                                                 />
                                             ))}
                                         </span>
