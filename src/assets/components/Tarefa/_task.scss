@@ -10,6 +10,12 @@
     align-items: center;
     padding: 0% 2%;
     width: auto;
+
+    .console{
+        display: flex;
+        width: auto;
+        gap: 15px;
+    }
     
     p{
         color: #333 !important;
@@ -39,6 +45,7 @@
         display: inline-block;
         position: relative;
         transition: background-color 0.3s;
+       
     }
     
     .status-ind::after {

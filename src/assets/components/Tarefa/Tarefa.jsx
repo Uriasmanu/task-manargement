@@ -42,17 +42,18 @@ const Tarefa = ({ id, name, collaborator, status, timetrackers, update }) => {
             ) : (
                 <p>Sem colaborador</p>
             )}
-
-            <button>
-                <img src={play} alt="play" />
-            </button>
-            <button>
-                <img src={more} alt="mais" />
-            </button>
-            <BotaoDelete
-                handleDelete={() => handleDelete(id)}
-                objectId={id} 
-            />
+            <div className='console'>
+                <button>
+                    <img src={play} alt="play" />
+                </button>
+                <button>
+                    <img src={more} alt="mais" />
+                </button>
+                <BotaoDelete
+                    handleDelete={() => handleDelete(id)}
+                    objectId={id}
+                />
+            </div>
         </div>
     );
 };
@@ -66,7 +67,7 @@ Tarefa.propTypes = {
     status: PropTypes.number.isRequired,
     timetrackers: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     update: PropTypes.string.isRequired,
-  
+
 };
 
 export default Tarefa;

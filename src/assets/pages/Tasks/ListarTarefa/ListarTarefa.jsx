@@ -1,8 +1,6 @@
-
 import './_listarTarefa.scss';
-
 import useData from '../../../hooks/useData';
-import BotaoDelete from '../../../components/BotaoDelete/BotaoDelete';
+import Tarefa from '../../../components/Tarefa/Tarefa'
 
 const ListarTarefa = () => {
     const { infos, handleDelete } = useData({ api: 'Tarefa', deleteEndpoint: 'Tarefa' });
@@ -13,21 +11,19 @@ const ListarTarefa = () => {
             <div className="lista">
                 {infos.length > 0 ? (
                     infos.map(tarefa => (
-                        <div key={tarefa.id} className="info">
-                            <div className="info__title">
-                                <p>{tarefa.id}</p>
-                                <p>{tarefa.uuidUserName}</p>
-                            </div>
-                            <div className="info__close">
-                                <BotaoDelete
-                                    handleDelete={handleDelete}
-                                    objectId={tarefa.id}
-                                />
-                            </div>
-                        </div>
+                        <Tarefa
+                            key={tarefa.id}
+                            id={tarefa.id}
+                            name={tarefa.name}
+                            collaborator={tarefa.collaborator}
+                            status={tarefa.status}
+                            timetrackers={tarefa.timetrackers}
+                            update={tarefa.update}
+                            handleDelete={handleDelete}
+                        />
                     ))
                 ) : (
-                    <p>Não há Tarefas cadastrados.</p>
+                    <p>Não há Tarefas cadastradas.</p>
                 )}
             </div>
         </div>
