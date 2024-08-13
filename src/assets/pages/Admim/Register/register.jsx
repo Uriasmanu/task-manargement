@@ -16,14 +16,14 @@ const Register = () => {
     event.preventDefault();
     try {
       await register(login, password);
-      setSuccess(true); // Exibir a mensagem de sucesso
+      setSuccess(true);
     } catch {
       setShowError(true);
     }
   };
 
   const handleDismiss = () => {
-    setSuccess(false); // Fechar a mensagem de sucesso
+    setSuccess(false); 
   };
 
   useEffect(() => {
