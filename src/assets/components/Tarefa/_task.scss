@@ -5,11 +5,15 @@
     border-radius: 0.75em;
     cursor: pointer;
     transition: ease 0.2s;
-    box-shadow: 1em 1em 1em rgba(216, 218, 224, 0.6941176471), -0.75em -0.75em 1em #ffffff;
+    box-shadow: 5px 6px 1px rgba(0, 0, 0, 0.3);
     border: 1.5px solid #f2f3f7;
     align-items: center;
     padding: 0% 2%;
-
+    width: auto;
+    
+    p{
+        color: #333 !important;
+    }
     
     .card:hover {
         background-color: #d3ddf1;
@@ -22,8 +26,9 @@
         margin-right: 2em;
         display: flex;
         flex-direction: row;
-        gap: 46px;
+        gap: 16px;
         width: auto;
+        align-items: center;
     }
     
     .status-ind {

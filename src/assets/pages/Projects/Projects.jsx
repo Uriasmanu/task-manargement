@@ -3,16 +3,26 @@ import Usuario from "../../components/Usuario/Usuario";
 import './_projects.scss'
 import deleteIcon from '../../imagens/delete.svg';
 import more from '../../imagens/more.svg';
+import mais from '../../imagens/stat_minus.svg';
 import useData from '../../hooks/useData';
+import Tarefa from "../../components/Tarefa/Tarefa";
+import { useState } from "react";
 
 const Projects = () => {
     const { infos, handleDelete } = useData({ api: 'Project/Active', deleteEndpoint: 'Project/Deleted' });
+    const [visibleTasks, setVisibleTasks] = useState({});
 
     if (!infos) {
         return <div>Carregando...</div>;
-    }
-    console.log(infos);
+    };
 
+    const VerTarefas = (projectId) => {
+        setVisibleTasks((prevState) => ({
+            ...prevState,
+            [projectId]: !prevState[projectId],
+        }));
+
+    };
 
     return (
         <div className="container-projetos">
@@ -49,9 +59,24 @@ const Projects = () => {
 
                                     <p>{project.descricao}</p>
 
-                                    <button className="ver-mais">Ver mais...</button>
-
+                                    <button className="ver-mais" onClick={() => VerTarefas(project.id)}>Tasks <img src={mais} alt="icone de seta para baixp" /></button>
+                                    {visibleTasks[project.id] && (
+                                        <span className="lista-de-tarefas">
+                                            {project.tarefas.$values.map((tarefa) => (
+                                                <Tarefa
+                                                    key={tarefa.id}
+                                                    id={tarefa.id}
+                                                    name={tarefa.name}
+                                                    collaborator={tarefa.collaborator}
+                                                    status={tarefa.status}
+                                                    timetrackers={tarefa.timetrackers}
+                                                    update={tarefa.updatedAt}
+                                                />
+                                            ))}
+                                        </span>
+                                    )}
                                 </div>
+
                             </div>
                         ))
                     ) : (
