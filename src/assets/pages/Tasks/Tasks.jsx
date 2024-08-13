@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Header from "../../components/Header/Header";
-import TarefaForm from "../../components/TarefaForm/TarefaForm";
 import './_tasks.scss'
 import ListarTarefa from "./ListarTarefa/ListarTarefa";
+import RegisterTarefa from "./Register/RegisterTarefa";
+
 
 
 const Tasks = () => {
@@ -31,7 +32,7 @@ const Tasks = () => {
                 {view === 'list' ? (
                     <ListarTarefa />
                 ) : (
-                    <TarefaForm />
+                    <RegisterTarefa />
                 )}
             </main>
         </div>
