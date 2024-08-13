@@ -8,7 +8,6 @@ const useData = ({ api, deleteEndpoint }) => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`https://localhost:7228/api/${api}`);
-                console.log('Resposta da API:', response.data); 
                 const data = response.data.$values || [];
                 setInfos(data);
             } catch (error) {

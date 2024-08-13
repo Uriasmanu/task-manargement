@@ -15,7 +15,10 @@ const Projects = () => {
 
     if (!infos) {
         return <div>Carregando...</div>;
+
     };
+
+    console.log(infos)
 
     const VerTarefas = (projectId) => {
         setVisibleTasks((prevState) => ({
@@ -64,30 +67,31 @@ const Projects = () => {
                                     <button className="ver-mais" onClick={() => VerTarefas(project.id)}>Tasks <img src={mais} alt="icone de seta para baixp" /></button>
                                     {visibleTasks[project.id] && (
                                         <div className="lista-de-tarefas">
-                                        {project.tarefas.length > 0 ? (
-                                            project.tarefas.$values.map((tarefa) => (
-                                                <Tarefa
-                                                    key={tarefa.id}
-                                                    id={tarefa.id}
-                                                    name={tarefa.name}
-                                                    collaborator={tarefa.collaborator}
-                                                    status={tarefa.status}
-                                                    timetrackers={tarefa.timetrackers}
-                                                    update={tarefa.updatedAt}
-                                                />
-                                            ))
-                                        ) : (
-                                            <p>Não há tarefas para mostrar</p> 
-                                        )}
-                                    </div>
-                                    
+                                            {project.tarefas && project.tarefas.$values && project.tarefas.$values.length > 0 ? (
+                                                project.tarefas.$values.map((tarefa) => (
+                                                    <Tarefa
+                                                        key={tarefa.id}
+                                                        id={tarefa.id}
+                                                        name={tarefa.name}
+                                                        collaborator={tarefa.collaborator}
+                                                        status={tarefa.status}
+                                                        timetrackers={tarefa.timetrackers}
+                                                        update={tarefa.updatedAt}
+                                                    />
+                                                ))
+                                            ) : (
+                                                <p>Não há tarefas para mostrar</p>
+                                            )}
+
+                                        </div>
+
                                     )}
                                 </div>
 
                             </div>
                         ))
                     ) : (
-                        <p>Não há usuários cadastrados.</p>
+                        <p>Não há projetos cadastrados.</p>
                     )}
 
                 </div>
