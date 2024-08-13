@@ -32,12 +32,49 @@
     }
     
     .status-ind {
-        width: 0.625em;
-        height: 0.625em;
-        background-color: #ff0000;
+        width: 0.925em;
+        height: 0.925em;
         margin: 0.375em 0;
         border-radius: 0.5em;
+        display: inline-block;
+        position: relative;
+        transition: background-color 0.3s;
     }
+    
+    .status-ind::after {
+        content: attr(data-status);
+        display: none;
+        position: absolute;
+        left: 1.5em;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #333;
+        color: #fff;
+        padding: 0.2em 0.5em;
+        border-radius: 0.25em;
+        font-size: 0.75em;
+    }
+    
+    .status-ind:hover::after {
+        display: block;
+    }
+    
+    .status-ind.inicio {
+        background-color: #ff0000; 
+    }
+    
+    .status-ind.andamento {
+        background-color: #ff9900; 
+    }
+    
+    .status-ind.concluido {
+        background-color: #00ff00;
+    }
+    
+    .status-ind.unknown {
+        background-color: #cccccc; 
+    }
+    
     
     .text-wrap {
         display: flex;
