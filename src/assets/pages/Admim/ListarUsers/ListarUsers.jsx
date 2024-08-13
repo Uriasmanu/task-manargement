@@ -1,7 +1,8 @@
 
 import './_listarUsers.scss';
-import deleteIcon from '../../../imagens/delete.svg';
+
 import useData from '../../../hooks/useData';
+import BotaoDelete from '../../../components/BotaoDelete/BotaoDelete';
 
 const ListarUsers = () => {
     const { infos, handleDelete } = useData({ api: 'Usuario', deleteEndpoint: 'Usuario' });
@@ -18,9 +19,10 @@ const ListarUsers = () => {
                                 <p>{usuario.uuidUserName}</p>
                             </div>
                             <div className="info__close">
-                                <button onClick={() => handleDelete(usuario.id)}>
-                                    <img src={deleteIcon} alt="ícone de deletar" />
-                                </button>
+                                <BotaoDelete
+                                    handleDelete={handleDelete}
+                                    objectId={usuario.id}
+                                />
                             </div>
                         </div>
                     ))
