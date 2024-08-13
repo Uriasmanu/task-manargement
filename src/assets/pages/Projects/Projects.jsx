@@ -63,20 +63,24 @@ const Projects = () => {
 
                                     <button className="ver-mais" onClick={() => VerTarefas(project.id)}>Tasks <img src={mais} alt="icone de seta para baixp" /></button>
                                     {visibleTasks[project.id] && (
-                                        <span className="lista-de-tarefas">
-                                            {project.tarefas.$values.map((tarefa) => (
+                                        <div className="lista-de-tarefas">
+                                        {project.tarefas.length > 0 ? (
+                                            project.tarefas.$values.map((tarefa) => (
                                                 <Tarefa
-                                                key={tarefa.id}
-                                                id={tarefa.id}
-                                                name={tarefa.name}
-                                                collaborator={tarefa.collaborator}
-                                                status={tarefa.status}
-                                                timetrackers={tarefa.timetrackers}
-                                                update={tarefa.updatedAt}
-                                                handleDelete={handleDelete}
+                                                    key={tarefa.id}
+                                                    id={tarefa.id}
+                                                    name={tarefa.name}
+                                                    collaborator={tarefa.collaborator}
+                                                    status={tarefa.status}
+                                                    timetrackers={tarefa.timetrackers}
+                                                    update={tarefa.updatedAt}
                                                 />
-                                            ))}
-                                        </span>
+                                            ))
+                                        ) : (
+                                            <p>Não há tarefas para mostrar</p> 
+                                        )}
+                                    </div>
+                                    
                                     )}
                                 </div>
 
