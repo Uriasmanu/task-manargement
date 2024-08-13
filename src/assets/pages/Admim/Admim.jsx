@@ -1,13 +1,14 @@
 import { useState } from "react";
 import Header from "../../components/Header/Header";
-import Sucesso from './sucesso/sucesso';
 import './_Admim.scss';
 import Register from './Register/register';
 import ListarUsers from "./ListarUsers/ListarUsers";
+import Sucesso from "../../components/sucesso/sucesso";
+
 
 const Admim = () => {
     const [success, setSuccess] = useState(false);
-    const [view, setView] = useState('register'); // Adicione um estado para alternar as views
+    const [view, setView] = useState('register'); 
 
     const handleDismiss = () => {
         setSuccess(false);

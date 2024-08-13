@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import './_register.scss';
 import useRegister from '../../../hooks/useRegister';
-import Sucesso from '../sucesso/sucesso';
+import Sucesso from '../../../components/sucesso/sucesso';
+
 
 
 const Register = () => {

@@ -35,7 +35,7 @@ const Tarefa = ({ id, name, collaborator, status, timetrackers, update }) => {
 
                 <p>{update}</p>
             </div>
-            <p>{timetrackers}</p>
+            <p>{timetrackers != null ? timetrackers : ""}</p>
 
             {collaborator ? (
                 <p>{collaborator.name}</p>
