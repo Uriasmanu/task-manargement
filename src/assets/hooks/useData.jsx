@@ -25,8 +25,11 @@ const useData = ({ api, deleteEndpoint }) => {
         const confirmDelete = window.confirm('Tem certeza que deseja excluir este item?');
         if (confirmDelete) {
             try {
-                await axios.delete(`https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/${deleteEndpoint}/Deleted/${id}`);
+                const url = `https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/${deleteEndpoint}/${id}`;
+                await axios.delete(url);
                 setShouldFetchData(prev => !prev); 
+                window.location.reload();
+
             } catch (error) {
                 console.error('Erro ao deletar item:', error);
             }
