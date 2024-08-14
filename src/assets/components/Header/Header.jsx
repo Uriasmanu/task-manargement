@@ -19,11 +19,7 @@ const Header = () => {
 
     return (
         <div className="container-header">
-            <div className='topo'>
-                <div className='mobile'>
-                    <MenuMobile />
-                </div>
-            </div>
+            
             <div className='titulo-logo'>
                 <img src={icon} alt="icone de engrenagem" />
                 <h3>Tasck System Manarge</h3>
