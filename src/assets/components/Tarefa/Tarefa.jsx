@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import tarefa from '../../imagens/splitscreen.svg';
 import BotaoDelete from '../BotaoDelete/BotaoDelete';
 import useData from '../../hooks/useData';
-import BotaoPlay from './botaoPlay/botaoPlay';
+import BotaoPlay from './BotaoPlay/BotaoPlay';
 
 const TransformStatus = (status) => {
     switch (status) {
