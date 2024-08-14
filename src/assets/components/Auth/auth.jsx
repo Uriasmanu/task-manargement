@@ -15,7 +15,7 @@ const Auth = () => {
     const success = await loginUser(login, password);  
     
     if (success) {
-      navigate('/dashboard');
+      navigate('/Dashboard');
     }
   };
 

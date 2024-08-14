@@ -17,9 +17,10 @@
     .informa{
         display: flex;
         width: 100%;
-        align-items: center;
         gap: 15px;
         height: auto;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .timer{
