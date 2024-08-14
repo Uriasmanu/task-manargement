@@ -5,6 +5,21 @@ import Tarefa from '../../../components/Tarefa/Tarefa'
 const ListarTarefa = () => {
     const { infos, handleDelete } = useData({ api: 'Tarefa', deleteEndpoint: 'Tarefa' });
 
+    const ExtrairHora = (tempo) =>{
+        const date = new Date(tempo);
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+
+        return `${hours}h${minutes}`;
+    }
+
+    const ExtrairDiaEMes = (dateTimeString) => {
+        const date = new Date(dateTimeString);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Janeiro é 0
+        return `${day}/${month}`;
+    }
+
     return (
         <div className="container-listar">
             <h2>Lista de Tarefas</h2>
@@ -17,7 +32,9 @@ const ListarTarefa = () => {
                             name={tarefa.name}
                             collaborator={tarefa.collaborator}
                             status={tarefa.status}
-                            timetrackers={tarefa.timetrackers}
+                            data = {tarefa.timeTrackers.length > 0 ? ExtrairDiaEMes(tarefa.timeTrackers[0].startTime) : 'Não disponível'}
+                            timetrackersStart={tarefa.timeTrackers.length > 0 ? ExtrairHora(tarefa.timeTrackers[0].startTime) : 'Não disponível'}
+                            timetrackersEnd={tarefa.timeTrackers.length > 0 ? ExtrairHora(tarefa.timeTrackers[0].endTime) : 'Não disponível'}
                             update={tarefa.update}
                             handleDelete={handleDelete}
                         />

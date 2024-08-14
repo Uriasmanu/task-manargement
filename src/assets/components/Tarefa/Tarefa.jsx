@@ -20,7 +20,7 @@ const TransformStatus = (status) => {
 }
 
 
-const Tarefa = ({ id, name, collaborator, status, timetrackers, update }) => {
+const Tarefa = ({ id, name, collaborator, status, timetrackersStart, timetrackersEnd, update, data }) => {
     const { className, text } = TransformStatus(status);
     const { infos, handleDelete } = useData({ api: 'Tarefa', deleteEndpoint: 'Tarefa' });
 
@@ -35,7 +35,14 @@ const Tarefa = ({ id, name, collaborator, status, timetrackers, update }) => {
 
                 <p>{update || ""}</p>
             </div>
-            <p>{timetrackers != null ? timetrackers : ""}</p>
+            <div className="timer">
+                <p>dia: {data}</p>
+                <div>
+                    <p>{timetrackersStart != null ? timetrackersStart : ""}</p>
+                    <p>|</p>
+                    <p>{timetrackersEnd != null ? timetrackersEnd : ""}</p>
+                </div>
+            </div>
 
             {collaborator ? (
                 <p>{collaborator.name}</p>
@@ -64,11 +71,13 @@ Tarefa.propTypes = {
     name: PropTypes.string.isRequired,
     collaborator: PropTypes.shape({
         name: PropTypes.string,
-       
+
     }),
     status: PropTypes.number.isRequired,
-    timetrackers: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    update: PropTypes.string, 
+    timetrackersStart: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    timetrackersEnd: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    data: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    update: PropTypes.string,
 };
 
 export default Tarefa;

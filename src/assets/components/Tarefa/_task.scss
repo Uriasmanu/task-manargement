@@ -11,6 +11,17 @@
     padding: 0% 2%;
     width: auto;
 
+    .timer{
+        display: flex;
+        width: auto;
+        gap: 15px;
+        font-weight: bold;
+        div{
+            display: flex;
+        }
+        
+    }
+
     .console{
         display: flex;
         width: auto;
