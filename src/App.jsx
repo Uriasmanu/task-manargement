@@ -8,10 +8,11 @@ import Dashboard from './assets/pages/Dashboard/Dashboard';
 import Admim from './assets/pages/Admim/Admim';
 
 
-import ProtectedRoute from './assets/Service/ProtectedRoute';
-import { AuthProvider } from './assets/context/AuthContext';
+//import ProtectedRoute from './assets/Service/ProtectedRoute';
+//import { AuthProvider } from './assets/context/AuthContext';
 
 function App() {
+  {/*
   return (
     <AuthProvider>
       <Router>
@@ -25,6 +26,23 @@ function App() {
         </Routes>
       </Router>
     </AuthProvider>
+  );
+  */}
+
+  return (
+
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        {/* Remove a proteção de rota */}
+        <Route path="/Dashboard" element={<Dashboard />} />
+        <Route path="/Projects" element={<Projects />} />
+        <Route path="/Tasks" element={<Tasks />} />
+        <Route path="/Admim" element={<Admim />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
+
   );
 }
 
