@@ -33,8 +33,8 @@ const ListarTarefa = () => {
                             collaborator={tarefa.collaborator}
                             status={tarefa.status}
                             data = {tarefa.timeTrackers.length > 0 ? ExtrairDiaEMes(tarefa.timeTrackers[0].startTime) : 'Não disponível'}
-                            timetrackersStart={tarefa.timeTrackers.length > 0 ? ExtrairHora(tarefa.timeTrackers[0].startTime) : 'Não disponível'}
-                            timetrackersEnd={tarefa.timeTrackers.length > 0 ? ExtrairHora(tarefa.timeTrackers[0].endTime) : 'Não disponível'}
+                            timetrackersStart={tarefa.timeTrackers.length > 0 ? ExtrairHora(tarefa.timeTrackers[0].startTime) : ''}
+                            timetrackersEnd={tarefa.timeTrackers.length > 0 ? ExtrairHora(tarefa.timeTrackers[0].endTime) : ''}
                             update={tarefa.update}
                             handleDelete={handleDelete}
                         />

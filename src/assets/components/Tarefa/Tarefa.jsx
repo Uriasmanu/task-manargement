@@ -1,8 +1,6 @@
 import './_task.scss';
 import PropTypes from 'prop-types';
 import tarefa from '../../imagens/splitscreen.svg';
-import more from '../../imagens/more.svg';
-import play from '../../imagens/play.svg';
 import BotaoDelete from '../BotaoDelete/BotaoDelete';
 import useData from '../../hooks/useData';
 import BotaoPlay from './botaoPlay/botaoPlay';
@@ -28,13 +26,30 @@ const Tarefa = ({ id, name, collaborator, status, timetrackersStart, timetracker
     console.log(infos)
     return (
         <div className="cards-tarefas">
-            <div className="container">
-                <img src={tarefa} alt="icone-tarefa" />
-                <p>{name}</p>
+            <div className='informa'>
+                <div className="container">
+                    <img src={tarefa} alt="icone-tarefa" />
+                    <p>{name}</p>
 
-                <div className={`status-ind ${className}`} data-status={text}></div>
+                    <div className={`status-ind ${className}`} data-status={text}></div>
 
-                <p>{update || ""}</p>
+                    <p>{update || ""}</p>
+                </div>
+
+
+                {collaborator ? (
+                    <p>{collaborator.name}</p>
+                ) : (
+                    <p>Sem colaborador</p>
+                )}
+                <div className='console'>
+                <BotaoPlay tarefaId={id} collaboratorID={collaborator ? collaborator : ''} />
+                   
+                    <BotaoDelete
+                        handleDelete={() => handleDelete(id)}
+                        objectId={id}
+                    />
+                </div>
             </div>
             <div className="timer">
                 <p>dia: {data}</p>
@@ -43,22 +58,6 @@ const Tarefa = ({ id, name, collaborator, status, timetrackersStart, timetracker
                     <p>|</p>
                     <p>{timetrackersEnd != null ? timetrackersEnd : ""}</p>
                 </div>
-            </div>
-
-            {collaborator ? (
-                <p>{collaborator.name}</p>
-            ) : (
-                <p>Sem colaborador</p>
-            )}
-            <div className='console'>
-                <BotaoPlay/>
-                <button>
-                    <img src={more} alt="mais" />
-                </button>
-                <BotaoDelete
-                    handleDelete={() => handleDelete(id)}
-                    objectId={id}
-                />
             </div>
         </div>
     );

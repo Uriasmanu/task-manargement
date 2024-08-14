@@ -7,17 +7,29 @@
     transition: ease 0.2s;
     box-shadow: 5px 6px 1px rgba(0, 0, 0, 0.3);
     border: 1.5px solid #CBB786;
-    align-items: center;
-    padding: 0% 2%;
+    align-items: flex-start;
+    padding: 2% 2%;
     width: auto;
+    flex-direction: column;
+    box-sizing: border-box;
+    gap: 15px;
+
+    .informa{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        gap: 15px;
+        height: auto;
+    }
 
     .timer{
         display: flex;
         width: auto;
         gap: 15px;
-        font-weight: bold;
+
         div{
             display: flex;
+            
         }
         
     }
@@ -25,6 +37,8 @@
     .console{
         display: flex;
         width: auto;
+        align-items: center;
+        margin-left: 5%;
         gap: 15px;
     }
     
@@ -38,8 +52,7 @@
     }
     
     .container {
-        margin-top: 1.25em;
-        margin-bottom: 1.375em;
+
         margin-right: 2em;
         display: flex;
         flex-direction: row;
