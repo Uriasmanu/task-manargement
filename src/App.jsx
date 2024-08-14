@@ -6,10 +6,11 @@ import Tasks from './assets/pages/Tasks/Tasks';
 import NotFound from './assets/pages/NotFound/NotFound';
 import Dashboard from './assets/pages/Dashboard/Dashboard';
 import Admim from './assets/pages/Admim/Admim';
+import { AuthProvider } from './assets/context/AuthContext';
 
 
 //import ProtectedRoute from './assets/Service/ProtectedRoute';
-//import { AuthProvider } from './assets/context/AuthContext';
+
 
 function App() {
   {/*
@@ -30,7 +31,7 @@ function App() {
   */}
 
   return (
-
+<AuthProvider>
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
@@ -42,7 +43,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
-
+</AuthProvider>
   );
 }
 
