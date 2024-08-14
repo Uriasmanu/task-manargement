@@ -1,5 +1,5 @@
-import './_header.scss';
-import './_headerMobile.scss';
+import './_header.scss'
+import './_Mobileheader.scss'
 
 import icon from '../../imagens/engrenagem.png';
 import logout from '../../imagens/logout.png';

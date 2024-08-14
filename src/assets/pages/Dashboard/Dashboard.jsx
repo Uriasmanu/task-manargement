@@ -1,6 +1,6 @@
 import Header from '../../components/Header/Header';
 import "./_dashbord.scss";
-import "./_dashbordMobile.scss";
+import "./_Mobiledashbord.scss";
 import done from '../../imagens/gostar.png';
 import relogio from '../../imagens/relogio.png';
 import aumentar from '../../imagens/aumentar.png';
