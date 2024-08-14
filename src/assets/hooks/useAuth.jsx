@@ -10,7 +10,7 @@ const useAuth = () => {
 
   const login = async (login, password) => {
     try {
-      const response = await axios.post('https://localhost:7228/api/conta/login', {
+      const response = await axios.post('https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/conta/login', {
         Login: login,
         Password: password,
       });
