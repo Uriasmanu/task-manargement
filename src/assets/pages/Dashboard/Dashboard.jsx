@@ -36,7 +36,7 @@ const Dashboard = () => {
     }
 
     if (!user) {
-        return <p>Usuário não encontrado.</p>; 
+        window.location.reload()
     }
 
     return (
