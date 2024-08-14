@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Header from "../../components/Header/Header";
-import './_Admim.scss';
+import './_admim.scss';
 import Register from './Register/register';
 import ListarUsers from "./ListarUsers/ListarUsers";
 import Sucesso from "../../components/sucesso/sucesso";

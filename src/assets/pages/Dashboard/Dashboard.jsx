@@ -109,9 +109,7 @@ const Dashboard = () => {
                         <p>Tempo Total</p>
                     </div>
                     
-                    <Tarefa />
-                    <Tarefa />
-                    <Tarefa />
+                
                 </div>
             </div>
 
