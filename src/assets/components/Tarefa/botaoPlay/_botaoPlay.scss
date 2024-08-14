@@ -1,0 +1,59 @@
+.container {
+    --color: #fff;
+    --size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    font-size: var(--size);
+    user-select: none;
+    fill: var(--color);
+}
+
+.container .play {
+    position: absolute;
+    animation: keyframes-fill .5s ease-in-out;
+}
+
+.container .pause {
+    position: absolute;
+    display: none;
+    animation: keyframes-fill .5s ease-in-out;
+}
+
+/* ------ On check event ------ */
+.container input:checked ~ .play {
+    display: none;
+}
+
+.container input:checked ~ .pause {
+    display: block;
+}
+
+/* ------ Hide the default checkbox ------ */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* ------ Animation ------ */
+@keyframes keyframes-fill {
+    0% {
+        transform: rotate(-180deg) scale(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: rotate(-10deg) scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+    }
+}

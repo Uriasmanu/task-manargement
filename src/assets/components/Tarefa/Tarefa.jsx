@@ -5,6 +5,7 @@ import more from '../../imagens/more.svg';
 import play from '../../imagens/play.svg';
 import BotaoDelete from '../BotaoDelete/BotaoDelete';
 import useData from '../../hooks/useData';
+import BotaoPlay from './botaoPlay/botaoPlay';
 
 const TransformStatus = (status) => {
     switch (status) {
@@ -50,9 +51,7 @@ const Tarefa = ({ id, name, collaborator, status, timetrackersStart, timetracker
                 <p>Sem colaborador</p>
             )}
             <div className='console'>
-                <button>
-                    <img src={play} alt="play" />
-                </button>
+                <BotaoPlay/>
                 <button>
                     <img src={more} alt="mais" />
                 </button>
