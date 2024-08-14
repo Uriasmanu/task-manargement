@@ -1,20 +1,14 @@
-
-import './_listarProjetos.scss'
-
+import './_listarProjetos.scss';
 import more from '../../../imagens/more.svg';
 import mais from '../../../imagens/stat_minus.svg';
-import { useState, useEffect } from "react";
-import useData from '../../../hooks/useData';
+import { useState } from 'react';
 import BotaoDelete from '../../../components/BotaoDelete/BotaoDelete';
 import Tarefa from '../../../components/Tarefa/Tarefa';
+import useData from '../../../hooks/useData';
 
 const Projects = () => {
-    const { infos, handleDelete, fetchData } = useData({ api: 'Project/Active', deleteEndpoint: 'Project/Deleted' });
+    const { infos, handleDelete } = useData({ api: 'Project/Active', deleteEndpoint: 'Project/Active' });
     const [visibleTasks, setVisibleTasks] = useState({});
-
-    useEffect(() => {
-        fetchData(); // Atualiza a lista de projetos e tarefas
-    }, [fetchData]);
 
     const VerTarefas = (projectId) => {
         setVisibleTasks((prevState) => ({
@@ -23,22 +17,17 @@ const Projects = () => {
         }));
     };
 
-    console.log(infos)
-
     const handleDeleteProject = async (id) => {
         await handleDelete(id);
-        fetchData(); // Atualiza a lista de projetos após a exclusão
     };
 
-    if (!infos) {
+    if (!infos.length) {
         return <div>Carregando...</div>;
     }
 
     return (
-        <div >
-
+        <div>
             <h2>Lista de Projetos</h2>
-
             <div className='container-lista-projeto'>
                 {infos.length > 0 ? (
                     infos.map((project) => (
@@ -46,12 +35,11 @@ const Projects = () => {
                             <div className="card__wrapper">
                                 <div className="card___wrapper-acounts">
                                     <div className="card__score">
-                                        {project.tarefas && project.tarefas.$values && project.tarefas.$values.length > 0 ? (
-                                            project.tarefas.$values.map((tarefa) => (
+                                        {project.tarefas && project.tarefas.length > 0 ? (
+                                            project.tarefas.map((tarefa) => (
                                                 <p key={tarefa.id}>
                                                     {tarefa.collaborator ? tarefa.collaborator.length : 0}
                                                 </p>
-
                                             ))
                                         ) : (
                                             <p>0</p>
@@ -80,8 +68,8 @@ const Projects = () => {
                                 </button>
                                 {visibleTasks[project.id] && (
                                     <div className="lista-de-tarefas">
-                                        {project.tarefas && project.tarefas.$values && project.tarefas.$values.length > 0 ? (
-                                            project.tarefas.$values.map((tarefa) => (
+                                        {project.tarefas && project.tarefas.length > 0 ? (
+                                            project.tarefas.map((tarefa) => (
                                                 <Tarefa
                                                     key={tarefa.id}
                                                     id={tarefa.id}
@@ -104,7 +92,6 @@ const Projects = () => {
                     <p>Não há projetos cadastrados.</p>
                 )}
             </div>
-
         </div>
     );
 };

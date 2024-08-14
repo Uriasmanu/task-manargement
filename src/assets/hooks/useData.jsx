@@ -1,34 +1,32 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const useData = ({ api, deleteEndpoint }) => {
     const [infos, setInfos] = useState([]);
-    const [shouldFetchData, setShouldFetchData] = useState(false); // Estado para controlar a busca de dados após exclusão
+    const [shouldFetchData, setShouldFetchData] = useState(false);
 
     // Função para buscar dados da API
-    const fetchData = useCallback(async () => {
+    const fetchData = async () => {
         try {
             const response = await axios.get(`https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/${api}`);
-            const data = response.data.$values || [];
+            const data = response.data || []; 
+            console.log('Dados recebidos:', data); 
             setInfos(data);
         } catch (error) {
             console.error('Erro ao buscar dados:', error);
         }
-    }, [api]);
+    };
 
-    
     useEffect(() => {
         fetchData();
-    }, [fetchData, shouldFetchData]);
+    }, [shouldFetchData]);
 
-    // Função para deletar um item
     const handleDelete = async (id) => {
         const confirmDelete = window.confirm('Tem certeza que deseja excluir este item?');
         if (confirmDelete) {
             try {
-                await axios.delete(`https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/${deleteEndpoint}/${id}`);
-                setShouldFetchData(prev => !prev); // Alterna a flag para acionar a busca de dados no useEffect
-                window.location.reload()
+                await axios.delete(`https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/${deleteEndpoint}/Deleted/${id}`);
+                setShouldFetchData(prev => !prev); 
             } catch (error) {
                 console.error('Erro ao deletar item:', error);
             }
