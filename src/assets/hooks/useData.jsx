@@ -8,7 +8,7 @@ const useData = ({ api, deleteEndpoint }) => {
     // Função para buscar dados da API
     const fetchData = useCallback(async () => {
         try {
-            const response = await axios.get(`https://localhost:7228/api/${api}`);
+            const response = await axios.get(`https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/${api}`);
             const data = response.data.$values || [];
             setInfos(data);
         } catch (error) {
@@ -26,7 +26,7 @@ const useData = ({ api, deleteEndpoint }) => {
         const confirmDelete = window.confirm('Tem certeza que deseja excluir este item?');
         if (confirmDelete) {
             try {
-                await axios.delete(`https://localhost:7228/api/${deleteEndpoint}/${id}`);
+                await axios.delete(`https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/${deleteEndpoint}/${id}`);
                 setShouldFetchData(prev => !prev); // Alterna a flag para acionar a busca de dados no useEffect
                 window.location.reload()
             } catch (error) {

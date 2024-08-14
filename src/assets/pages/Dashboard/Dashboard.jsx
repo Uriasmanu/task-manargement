@@ -4,7 +4,6 @@ import done from '../../imagens/gostar.png';
 import relogio from '../../imagens/relogio.png';
 import aumentar from '../../imagens/aumentar.png';
 import Dia from '../../components/Dia';
-import Tarefa from '../../components/Tarefa/Tarefa';
 import Usuario from '../../components/Usuario/Usuario';
 import { jwtDecode } from "jwt-decode";
 import { useContext, useEffect, useState } from 'react';

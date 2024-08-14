@@ -9,7 +9,7 @@ const useTasks = () => {
             // Verificar os dados antes de enviar
             console.log('Enviando dados:', { Name: nome, Descritiva: descritiva, ProjetoId: projetoId });
     
-            const response = await axios.post('https://localhost:7228/api/Tarefa', {
+            const response = await axios.post('https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/Tarefa', {
                 Name: nome,
                 Descritiva: descritiva,
                 ProjectId: projetoId

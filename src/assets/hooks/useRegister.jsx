@@ -6,7 +6,7 @@ const useRegister = () => {
 
   const register = async (login, password) => {
     try {
-      const response = await axios.post('https://localhost:7228/api/Usuario', {
+      const response = await axios.post('https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/Usuario', {
         UUIDUserName: login,
         Password: password,
       });
