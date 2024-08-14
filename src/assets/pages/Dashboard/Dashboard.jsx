@@ -112,7 +112,7 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            <Usuario />
+
         </div>
     );
 }
