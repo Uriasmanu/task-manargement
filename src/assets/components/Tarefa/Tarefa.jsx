@@ -33,7 +33,7 @@ const Tarefa = ({ id, name, collaborator, status, timetrackers, update }) => {
 
                 <div className={`status-ind ${className}`} data-status={text}></div>
 
-                <p>{update}</p>
+                <p>{update || ""}</p>
             </div>
             <p>{timetrackers != null ? timetrackers : ""}</p>
 
@@ -58,16 +58,17 @@ const Tarefa = ({ id, name, collaborator, status, timetrackers, update }) => {
     );
 };
 
+
 Tarefa.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     collaborator: PropTypes.shape({
         name: PropTypes.string,
+       
     }),
     status: PropTypes.number.isRequired,
     timetrackers: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    update: PropTypes.string.isRequired,
-
+    update: PropTypes.string, 
 };
 
 export default Tarefa;
