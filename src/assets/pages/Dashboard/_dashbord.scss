@@ -7,11 +7,18 @@
     padding-right: 10%;
     box-sizing: border-box;
 
+
+    .header{
+        width: 40%;
+        height: 100vh;
+    }
+
     .main{
         display: flex;
         flex-direction: column;
         gap: 5%;
         height: 100vh;
+        padding: 2% 0;
 
         .apresentacao{
             display: flex;

@@ -1,5 +1,6 @@
 import Header from '../../components/Header/Header';
 import "./_dashbord.scss";
+import "./_dashbordMobile.scss";
 import done from '../../imagens/gostar.png';
 import relogio from '../../imagens/relogio.png';
 import aumentar from '../../imagens/aumentar.png';
@@ -42,7 +43,9 @@ const Dashboard = () => {
     return (
         
         <div className="container-dashboard">
+            <div className='header'>
             <Header />
+            </div>
             <div className='main'>
                 <div className='apresentacao'>
                     <div className='chamada'>
