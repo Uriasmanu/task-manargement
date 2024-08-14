@@ -23,6 +23,8 @@ const Projects = () => {
         }));
     };
 
+    console.log(infos)
+
     const handleDeleteProject = async (id) => {
         await handleDelete(id);
         fetchData(); // Atualiza a lista de projetos após a exclusão
@@ -34,65 +36,74 @@ const Projects = () => {
 
     return (
         <div >
-   
-                <h2>Lista de Projetos</h2>
 
-                <div className='container-lista-projeto'>
-                    {infos.length > 0 ? (
-                        infos.map((project) => (
-                            <div key={project.id} className="card">
-                                <div className="card__wrapper">
-                                    <div className="card___wrapper-acounts">
-                                        <div className="card__score">
-                                            <p>2 {/*quantidade de colaboradores*/}</p>
-                                        </div>
-                                    </div>
-                                    <div className='controles'>
-                                        <BotaoDelete
-                                            handleDelete={() => handleDeleteProject(project.id)}
-                                            objectId={project.id}
-                                        />
-                                        <div className="card__menu">
-                                            <button>
-                                                <img src={more} alt="mais" />
-                                            </button>
-                                        </div>
+            <h2>Lista de Projetos</h2>
+
+            <div className='container-lista-projeto'>
+                {infos.length > 0 ? (
+                    infos.map((project) => (
+                        <div key={project.id} className="card">
+                            <div className="card__wrapper">
+                                <div className="card___wrapper-acounts">
+                                    <div className="card__score">
+                                        {project.tarefas && project.tarefas.$values && project.tarefas.$values.length > 0 ? (
+                                            project.tarefas.$values.map((tarefa) => (
+                                                <p key={tarefa.id}>
+                                                    {tarefa.collaborator ? tarefa.collaborator.length : 0}
+                                                </p>
+
+                                            ))
+                                        ) : (
+                                            <p>0</p>
+                                        )}
                                     </div>
                                 </div>
-                                <div className="card__title">
-                                    {project.name}
-                                </div>
-                                <div className="card__indicator">
-                                    <p>{project.descricao}</p>
-                                    <button className="ver-mais" onClick={() => VerTarefas(project.id)}>
-                                        Tasks <img src={mais} alt="icone de seta para baixo" />
-                                    </button>
-                                    {visibleTasks[project.id] && (
-                                        <div className="lista-de-tarefas">
-                                            {project.tarefas && project.tarefas.$values && project.tarefas.$values.length > 0 ? (
-                                                project.tarefas.$values.map((tarefa) => (
-                                                    <Tarefa
-                                                        key={tarefa.id}
-                                                        id={tarefa.id}
-                                                        name={tarefa.name}
-                                                        collaborator={tarefa.collaborator}
-                                                        status={tarefa.status}
-                                                        timetrackers={tarefa.timetrackers}
-                                                        update={tarefa.updatedAt}
-                                                    />
-                                                ))
-                                            ) : (
-                                                <p>Não há tarefas para mostrar</p>
-                                            )}
-                                        </div>
-                                    )}
+                                <div className='controles'>
+                                    <BotaoDelete
+                                        handleDelete={() => handleDeleteProject(project.id)}
+                                        objectId={project.id}
+                                    />
+                                    <div className="card__menu">
+                                        <button>
+                                            <img src={more} alt="mais" />
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        ))
-                    ) : (
-                        <p>Não há projetos cadastrados.</p>
-                    )}
-                </div>
+                            <div className="card__title">
+                                {project.name}
+                            </div>
+                            <div className="card__indicator">
+                                <p>{project.descricao}</p>
+                                <button className="ver-mais" onClick={() => VerTarefas(project.id)}>
+                                    Tasks <img src={mais} alt="icone de seta para baixo" />
+                                </button>
+                                {visibleTasks[project.id] && (
+                                    <div className="lista-de-tarefas">
+                                        {project.tarefas && project.tarefas.$values && project.tarefas.$values.length > 0 ? (
+                                            project.tarefas.$values.map((tarefa) => (
+                                                <Tarefa
+                                                    key={tarefa.id}
+                                                    id={tarefa.id}
+                                                    name={tarefa.name}
+                                                    collaborator={tarefa.collaborator}
+                                                    status={tarefa.status}
+                                                    timetrackers={tarefa.timetrackers}
+                                                    update={tarefa.updatedAt}
+                                                />
+                                            ))
+                                        ) : (
+                                            <p>Não há tarefas para mostrar</p>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    ))
+                ) : (
+                    <p>Não há projetos cadastrados.</p>
+                )}
+            </div>
 
         </div>
     );
