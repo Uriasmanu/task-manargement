@@ -23,11 +23,12 @@ const Header = () => {
                 <div className='mobile'>
                     <MenuMobile />
                 </div>
-                <div className='titulo-logo'>
-                    <img src={icon} alt="icone de engrenagem" />
-                    <h3>Tasck System Manarge</h3>
-                </div>
             </div>
+            <div className='titulo-logo'>
+                <img src={icon} alt="icone de engrenagem" />
+                <h3>Tasck System Manarge</h3>
+            </div>
+
             <div>
                 <ul className='menus-container'>
                     <div className="menu-itens" onClick={() => handleNavigation('/Dashboard')}>

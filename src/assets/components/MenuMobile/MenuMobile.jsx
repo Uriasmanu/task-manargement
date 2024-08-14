@@ -1,15 +1,19 @@
-import './_menuMobile.scss'
+// MenuMobile.jsx
+import React from 'react';
+import './_menuMobile.scss';
 
-const MenuMobile = () => {
+const MenuMobile = ({ onClick }) => {
     return (
-        <label className="hamburger">
-            <input type="checkbox" />
-            <svg viewBox="0 0 32 32">
-                <path className="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
-                <path className="line" d="M7 16 27 16"></path>
-            </svg>
-        </label >
-    )
+        <button >
+            <input id="checkbox" type="checkbox" onClick={onClick}/>
+                <label className="toggle" for="checkbox">
+                    <div id="bar1" class="bars"></div>
+                    <div id="bar2" class="bars"></div>
+                    <div id="bar3" class="bars"></div>
+                </label>
+        </button>
+
+    );
 }
 
 export default MenuMobile;
