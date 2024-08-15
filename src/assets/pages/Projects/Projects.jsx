@@ -24,7 +24,7 @@ const Projects = () => {
     };
 
     const handleListUsers = () => {
-        setView('list');
+        setView('lista');
     };
 
     const handleRegister = () => {
@@ -56,7 +56,7 @@ const Projects = () => {
                         ─ Registre um novo Projetos
                     </button>
                 </div>
-                {view === 'list' ? (
+                {view === 'lista' ? (
                     <ListarProjetos />
                 ) : (
                     <>

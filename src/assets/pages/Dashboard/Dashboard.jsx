@@ -9,14 +9,12 @@ import { AuthContext } from '../../context/AuthContext';
 import MenuMobile from '../../components/MenuMobile/MenuMobile';
 import useRelatorio from '../../hooks/useRelatorio';
 
-
 /**
  * Componente que exibe dados do relatório e gerencia a visibilidade do dashboard.
  * Utiliza contexto de autenticação e hook personalizado para relatar dados.
  */
 
 const Dashboard = () => {
-
     // Obtém o usuário do contexto de autenticação
     const { user } = useContext(AuthContext);
 
@@ -26,11 +24,10 @@ const Dashboard = () => {
     const [isDashboardVisible, setIsDashboardVisible] = useState(true);
     const { data, loading: relatorioLoading, error, dailyTime, monthlyTime } = useRelatorio();
 
-
     /**
-    * Efeito colateral para decodificar o token JWT e definir o payload.
-    * Executa quando o usuário muda.
-    */
+     * Efeito colateral para decodificar o token JWT e definir o payload.
+     * Executa quando o usuário muda.
+     */
     useEffect(() => {
         if (user && user.token) {
             try {
@@ -65,11 +62,19 @@ const Dashboard = () => {
     }
 
     /**
-    * Alterna a visibilidade do dashboard.
-    * Se o dashboard estiver visível, será ocultado e vice-versa.
-    */
+     * Alterna a visibilidade do dashboard.
+     * Se o dashboard estiver visível, será ocultado e vice-versa.
+     */
     const toggleVisibility = () => {
         setIsDashboardVisible(prevState => !prevState);
+    };
+
+    // Função para formatar o tempo em horas e minutos
+    const formatoTempo = (houras) => {
+        const totalMinutos = Math.round(houras * 60);
+        const hoursPart = Math.floor(totalMinutos / 60);
+        const minutesPart = totalMinutos % 60;
+        return `${String(hoursPart).padStart(2, '0')}h${String(minutesPart).padStart(2, '0')}`;
     };
 
     return (
@@ -105,7 +110,7 @@ const Dashboard = () => {
                                 <h3>Tempo Gasto hoje.</h3>
                             </div>
                         </div>
-                        <p>{dailyTime.toFixed(2)}hrs</p>
+                        <p>{formatoTempo(dailyTime)}</p>
                     </div>
 
                     <div className="card">
@@ -117,7 +122,7 @@ const Dashboard = () => {
                                 <h3>Tempo Gasto este mês.</h3>
                             </div>
                         </div>
-                        <p>{monthlyTime.toFixed(2)}hrs</p>
+                        <p>{formatoTempo(monthlyTime)}</p>
                     </div>
                 </div>
             </div>

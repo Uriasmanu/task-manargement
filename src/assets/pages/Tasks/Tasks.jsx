@@ -10,7 +10,7 @@ import MenuMobile from "../../components/MenuMobile/MenuMobile";
 
 const Tasks = () => {
     // Estado para controlar a visão atual (registro ou lista de tarefas)
-    const [view, setView] = useState('register');
+    const [view, setView] = useState('list');
 
     // Altera a visão atual para 'list', exibindo a lista de tarefas.
     const handleListTarefa = () => {
