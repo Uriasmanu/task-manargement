@@ -17,169 +17,158 @@
         height: 100vh;
     }
 
-    .main.visible {
-        display: flex;
-        flex-direction: column;
-        gap: 5%;
-        height: 100vh;
-        padding: 2% 0;
-        width: 90%;
-
-        .apresentacao {
+    .main {
+        &.visible {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            width: 100%;
+            flex-direction: column;
+            gap: 5%;
+            height: 100vh;
+            padding: 2% 0;
+            width: 90%;
 
-            .chamada {
+            .apresentacao {
                 display: flex;
-                flex-direction: column;
-                width: 70%;
-                gap: 15px;
-                height: auto;
+                justify-content: space-between;
+                align-items: flex-start;
+                width: 100%;
+
+                .chamada {
+                    display: flex;
+                    flex-direction: column;
+                    width: 70%;
+                    gap: 15px;
+                    height: auto;
+                }
             }
-        }
 
-        .container-indicadores {
-            display: flex;
-            justify-content: space-around;
-            border-top: solid 2px rgb(197, 197, 197);
-            border-bottom: solid 2px rgb(197, 197, 197);
-            width: 100%;
-            padding: 2%;
-
-            .indicadores {
-
-                padding: 1% 3%;
+            .container-indicadores {
                 display: flex;
-                align-items: center;
-                width: 30%;
+                justify-content: space-around;
+                border-top: 2px solid rgb(197, 197, 197);
+                border-bottom: 2px solid rgb(197, 197, 197);
+                width: 100%;
+                padding: 2%;
+
+                .indicadores {
+                    padding: 1% 3%;
+                    display: flex;
+                    align-items: center;
+                    width: 30%;
+                    gap: 10%;
+
+                    img {
+                        width: 10%;
+                        height: auto;
+                    }
+
+                    &:nth-child(1),
+                    &:nth-child(2) {
+                        border-right: 2px solid rgb(197, 197, 197);
+                    }
+                }
+            }
+
+            .card-tempo {
+                display: flex;
+                width: 100%;
                 gap: 10%;
 
-                img {
-                    width: 10%;
+                .card {
+                    width: 70%;
+                    background: #fff480;
+                    color: black;
+                    position: relative;
+                    border-radius: 2.5em;
+                    padding: 2em;
+                    transition: transform 0.4s ease;
+                    display: flex;
+                    flex-direction: column;
                     height: auto;
+
+                    p {
+                        align-self: center;
+                        margin-top: 4%;
+                        font-size: 2rem;
+                    }
+
+                    .card-content {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        gap: 5em;
+                        height: 100%;
+                        transition: transform 0.4s ease;
+                    }
+
+                    .card-top,
+                    .card-bottom {
+                        display: flex;
+                        justify-content: space-between;
+
+                        p,
+                        .card-title {
+                            margin: 0;
+                        }
+
+                        .card-title {
+                            font-weight: bold;
+                            width: 30%;
+
+                            img {
+                                width: 30px;
+                                height: auto;
+                            }
+                        }
+
+                        p {
+                            font-weight: 600;
+                        }
+                    }
+
+                    .card-bottom {
+                        align-items: flex-end;
+                    }
+
+                    .card-image {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        top: 0;
+                        left: 0;
+                        display: grid;
+                        place-items: center;
+                        pointer-events: none;
+
+                        p {
+                            font-size: 30px;
+                        }
+
+                        svg {
+                            width: 4em;
+                            height: 4em;
+                            transition: transform 0.4s ease;
+                        }
+                    }
+
+                    &:hover {
+                        cursor: pointer;
+                        transform: scale(0.97);
+
+                        .card-content {
+                            transform: scale(0.96);
+                        }
+
+                        .card-image svg {
+                            transform: scale(1.05);
+                        }
+                    }
+
+                    &:active {
+                        transform: scale(0.9);
+                    }
                 }
-            }
-
-            .indicadores:nth-child(1) {
-                border-right: solid 2px rgb(197, 197, 197);
-
-            }
-
-            .indicadores:nth-child(2) {
-                border-right: solid 2px rgb(197, 197, 197);
-
             }
         }
-
-        .card-tempo {
-            display: flex;
-            width: 100%;
-            gap: 10%;
-
-
-            .card {
-                width: 70%;
-                background: #fff480;
-                color: black;
-                position: relative;
-                border-radius: 2.5em;
-                padding: 2em;
-                transition: transform 0.4s ease;
-                display: flex;
-                flex-direction: column;
-                height: auto;
-
-                p {
-                    align-self: center;
-                    margin-top: 4%;
-                    font-size: 2rem;
-                }
-            }
-
-            .card .card-content {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                gap: 5em;
-                height: 100%;
-                transition: transform 0.4s ease;
-            }
-
-            .card .card-top,
-            .card .card-bottom {
-                display: flex;
-                justify-content: space-between;
-            }
-
-            .card .card-top p,
-            .card .card-top .card-title,
-            .card .card-bottom p,
-            .card .card-bottom .card-title {
-                margin: 0;
-            }
-
-            .card .card-title {
-                font-weight: bold;
-                width: 30%;
-
-                img {
-                    width: 30px;
-                    height: auto;
-                }
-            }
-
-            .card .card-top p,
-            .card .card-bottom p {
-                font-weight: 600;
-            }
-
-            .card .card-bottom {
-                align-items: flex-end;
-            }
-
-            .card .card-image {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-                display: grid;
-                place-items: center;
-                pointer-events: none;
-
-                p {
-                    font-size: 30px;
-                }
-            }
-
-            .card .card-image svg {
-                width: 4em;
-                height: 4em;
-                transition: transform 0.4s ease;
-            }
-
-            .card:hover {
-                cursor: pointer;
-                transform: scale(0.97);
-            }
-
-            .card:hover .card-content {
-                transform: scale(0.96);
-            }
-
-            .card:hover .card-image svg {
-                transform: scale(1.05);
-            }
-
-            .card:active {
-                transform: scale(0.9);
-            }
-
-
-        }
-
     }
 
     .resumo-tarefas {
@@ -194,9 +183,5 @@
             justify-content: space-between;
             align-items: center;
         }
-
-
     }
-
-
 }

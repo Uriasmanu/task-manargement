@@ -105,7 +105,7 @@ const Dashboard = () => {
                                 <h3>Tempo Gasto hoje.</h3>
                             </div>
                         </div>
-                        <p>{dailyTime.toFixed(2)}h</p>
+                        <p>{dailyTime.toFixed(2)}hrs</p>
                     </div>
 
                     <div className="card">
@@ -117,7 +117,7 @@ const Dashboard = () => {
                                 <h3>Tempo Gasto este mês.</h3>
                             </div>
                         </div>
-                        <p>{monthlyTime.toFixed(2)}h</p>
+                        <p>{monthlyTime.toFixed(2)}hrs</p>
                     </div>
                 </div>
             </div>

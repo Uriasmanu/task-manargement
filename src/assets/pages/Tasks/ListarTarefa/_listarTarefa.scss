@@ -12,7 +12,8 @@
     width: 90%;
     padding: 2% 0%;
     gap: 12px;
-    height: auto;
+    max-height: 600px; 
+    overflow-y: auto; 
 
     .info {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
