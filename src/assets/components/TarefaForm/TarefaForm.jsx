@@ -1,4 +1,6 @@
 import './_tarefaForm.scss';
+import './_MobiletarefaForm.scss';
+
 
 const TarefaForm = () => {
     return (

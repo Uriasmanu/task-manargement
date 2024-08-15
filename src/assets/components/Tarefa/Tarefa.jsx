@@ -1,4 +1,5 @@
 import './_task.scss';
+import './_Mobiletask.scss';
 import PropTypes from 'prop-types';
 import tarefa from '../../imagens/splitscreen.svg';
 import BotaoDelete from '../BotaoDelete/BotaoDelete';
@@ -40,7 +41,7 @@ const Tarefa = ({ id, name, collaborator, status, timetrackersStart, timetracker
                 {collaborator ? (
                     <p>{collaborator.name}</p>
                 ) : (
-                    <p>Sem colaborador</p>
+                    <p></p>
                 )}
                 <div className='console'>
                 <BotaoPlay tarefaId={id} collaboratorID={collaborator ? collaborator : ''} />

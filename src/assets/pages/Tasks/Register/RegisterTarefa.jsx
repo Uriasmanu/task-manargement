@@ -1,4 +1,6 @@
 import './_registerTarefa.scss';
+import './_MobileregisterTarefa.scss';
+
 import useTask from '../../../hooks/useTasks'; 
 import { useState, useEffect } from 'react';
 import Sucesso from '../../../components/sucesso/sucesso';

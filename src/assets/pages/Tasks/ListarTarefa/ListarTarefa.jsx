@@ -1,4 +1,5 @@
 import './_listarTarefa.scss';
+import './_MobilelistarTarefa.scss';
 import useData from '../../../hooks/useData';
 import Tarefa from '../../../components/Tarefa/Tarefa'
 
