@@ -9,33 +9,14 @@ import Admim from './assets/pages/Admim/Admim';
 import { AuthProvider } from './assets/context/AuthContext';
 
 
-//import ProtectedRoute from './assets/Service/ProtectedRoute';
-
 
 function App() {
-  {/*
-  return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/Dashboard" element={<ProtectedRoute element={Dashboard} />} />
-          <Route path="/Projects" element={<ProtectedRoute element={Projects} />} />
-          <Route path="/Tasks" element={<ProtectedRoute element={Tasks} />} />
-          <Route path="/Admim" element={<ProtectedRoute element={Admim} />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
-  );
-  */}
 
   return (
 <AuthProvider>
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        {/* Remove a proteção de rota */}
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Projects" element={<Projects />} />
         <Route path="/Tasks" element={<Tasks />} />
