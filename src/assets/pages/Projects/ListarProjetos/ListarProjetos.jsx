@@ -8,7 +8,7 @@ import BotaoDelete from '../../../components/BotaoDelete/BotaoDelete';
 import Tarefa from '../../../components/Tarefa/Tarefa';
 import useData from '../../../hooks/useData';
 
-const Projects = () => {
+const ListarProjetos = () => {
     const { infos, handleDelete } = useData({ api: 'Project/Active', deleteEndpoint: 'Project' });
     const [visibleTasks, setVisibleTasks] = useState({});
 
@@ -98,4 +98,4 @@ const Projects = () => {
     );
 };
 
-export default Projects;
+export default ListarProjetos;
