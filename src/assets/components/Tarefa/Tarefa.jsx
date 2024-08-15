@@ -44,7 +44,7 @@ const Tarefa = ({ id, name, collaborator, status, timetrackersStart, timetracker
                     <p></p>
                 )}
                 <div className='console'>
-                <BotaoPlay tarefaId={id} collaboratorID={collaborator ? collaborator : ''} />
+                <BotaoPlay tarefa={id} />
                    
                     <BotaoDelete
                         handleDelete={() => handleDelete(id)}

@@ -1,61 +1,93 @@
-.botaoPlay {
-  .container {
-    --color: #fff;
-    --size: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-    font-size: var(--size);
-    user-select: none;
-    fill: var(--color);
-  }
+/* From Uiverse.io by Na3ar-17 */ 
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
+  width: 100px;
+}
 
-  .container .play {
-    position: absolute;
-    animation: keyframes-fill 0.5s ease-in-out;
-  }
+.switch {
+  font-size: 0.875rem;
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 2.6em;
+}
 
-  .container .pause {
-    position: absolute;
-    display: none;
-    animation: keyframes-fill 0.5s ease-in-out;
-  }
+.switch input {
+  display: none;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
 
-  /* ------ On check event ------ */
-  .container input:checked ~ .play {
-    display: none;
-  }
+.switch input:checked + .slider .ball {
+  box-shadow: 10px 10px 100px #7f8996;
+}
 
-  .container input:checked ~ .pause {
-    display: block;
-  }
+.switch input:checked + .slider .title {
+  left: 40%;
+}
 
-  /* ------ Hide the default checkbox ------ */
-  .container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
+.switch input:checked + .slider {
+  background-color: #5cd460;
+}
 
-  /* ------ Animation ------ */
-  @keyframes keyframes-fill {
-    0% {
-      transform: rotate(-180deg) scale(0);
-      opacity: 0;
-    }
+.switch input:focus + .slider {
+  box-shadow: 10px 10px 100px #7f8996;
+}
 
-    50% {
-      transform: rotate(-10deg) scale(1.2);
-      opacity: 1;
-    }
+.switch input:checked + .slider .ball {
+  left: 37%;
+  transform: rotate(360deg);
+  box-shadow: none;
+  outline: 6px solid rgba(255, 255, 255, 0.278);
+}
 
-    100% {
-      transform: rotate(0deg) scale(1);
-      opacity: 1;
-    }
-  }
+.switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #313033;
+  transition: all 0.4s;
+  border-radius: 30px;
+}
+
+.switch .slider .title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 600;
+  transition: all 0.4s;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.switch .slider .ball {
+  background-color: #fff;
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  position: absolute;
+  left: -1px;
+  transition: 0.4s;
+}
+
+.switch .slider .ball .icon {
+  position: absolute;
+  top: 58%;
+  left: 53%;
+  transform: translate(-50%, -50%);
+  color: #313033;
+  font-size: 12px;
 }

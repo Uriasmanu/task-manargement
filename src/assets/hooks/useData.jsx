@@ -10,7 +10,7 @@ const useData = ({ api, deleteEndpoint }) => {
         try {
             const response = await axios.get(`https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/${api}`);
             const data = response.data || []; 
-            console.log('Dados recebidos:', data); 
+            
             setInfos(data);
         } catch (error) {
             console.error('Erro ao buscar dados:', error);

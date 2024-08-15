@@ -1,51 +1,105 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './_botaoPlay.scss';
 import PropTypes from 'prop-types';
+import { AuthContext } from '../../../context/AuthContext';
+import { jwtDecode } from 'jwt-decode';
+import useTimeTrackers from '../../../hooks/useTimeTrackers';
+import axios from 'axios';
 
-const BotaoPlay = ({ tarefaId, collaboratorID }) => {
-    const [isPlaying, setIsPlaying] = useState(false);
-
+const BotaoPlay = ({ tarefa }) => {
+    const [payload, setPayload] = useState(null);
+    const { user } = useContext(AuthContext);
+    const { collaborators } = useTimeTrackers();
+    const [isTracking, setIsTracking] = useState(false);
+    const [startTime, setStartTime] = useState(null);
+    const [selectedCollaboratorId, setSelectedCollaboratorId] = useState(null); 
+    
     const handleClick = () => {
-        setIsPlaying(!isPlaying);
-        // Aqui você pode fazer uma chamada à API para iniciar/parar o rastreamento
-        fetch('https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net//api/TimeTracker/start', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                startTime: new Date().toISOString(),
-                tarefasId: tarefaId,
-                collaboratorId: collaboratorID,
-            }),
+        const currentTime = new Date().toISOString();
+        setStartTime(currentTime);
+        setIsTracking(!isTracking);
+
+        axios.post('https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/TimeTracker/start', {
+            startTime: currentTime,
+            tarefasId: tarefa,
+            collaboratorId: selectedCollaboratorId, // Use o colaborador selecionado
+            createdAt: currentTime
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
+        .then(response => {
+            console.log('Requisição bem-sucedida:', response.data);
         })
-        .catch((error) => {
-            console.error('Error:', error);
+        .catch(error => {
+            console.error('Erro na requisição:', error);
         });
     };
 
+    useEffect(() => {
+        if (user && user.token) {
+            try {
+                const decodedToken = jwtDecode(user.token);
+                setPayload(decodedToken);
+            } catch (error) {
+                console.error('Erro ao decodificar o token:', error);
+            }
+        }
+    }, [user]);
+
+    useEffect(() => {
+        if (collaborators) {
+            // Defina o ID do primeiro colaborador ou o ID desejado
+            if (collaborators.length > 0) {
+                setSelectedCollaboratorId(collaborators[0].id);
+            }
+        }
+    }, [collaborators]);
+
     return (
-        <div className="botaoPlay">
-            <label className="container" aria-label="Play/Pause Button" onClick={handleClick}>
-                <input type="checkbox" id="playPause" checked={isPlaying} readOnly />
-                <svg viewBox="0 0 384 512" height="1em" xmlns="http://www.w3.org/2000/svg" className={`play ${isPlaying ? 'hidden' : ''}`}>
-                    <path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path>
-                </svg>
-                <svg viewBox="0 0 320 512" height="1em" xmlns="http://www.w3.org/2000/svg" className={`pause ${isPlaying ? '' : 'hidden'}`}>
-                    <path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"></path>
-                </svg>
+        <div className="container">
+            {collaborators && collaborators.map(collaborator => (
+                <div 
+                    key={collaborator.id} 
+                    onClick={() => setSelectedCollaboratorId(collaborator.id)} // Atualize o ID do colaborador selecionado ao clicar
+                    className={selectedCollaboratorId === collaborator.id ? 'selected' : ''}
+                >
+                    {collaborator.id}
+                </div>
+            ))}
+            <label className="switch">
+                <input type="checkbox" checked={isTracking} onChange={handleClick} />
+                <span className="slider">
+                    <span className="title">
+                        {isTracking ? '' : ''}
+                    </span>
+                    <span className="ball">
+                        <span className="icon">
+                            <svg
+                                className="w-6 h-6 text-gray-800 dark:text-white"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="25"
+                                height="25"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke="currentColor"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M8 18V6l8 6-8 6Z"
+                                ></path>
+                            </svg>
+                        </span>
+                    </span>
+                </span>
             </label>
         </div>
     );
 };
 
 BotaoPlay.propTypes = {
-    tarefaId: PropTypes.string.isRequired,
-    collaboratorID: PropTypes.string.isRequired,
+    tarefa: PropTypes.string.isRequired,
+    collaboratorID: PropTypes.string,
 };
 
 export default BotaoPlay;
