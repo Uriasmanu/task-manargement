@@ -9,7 +9,11 @@ import Tarefa from '../../../components/Tarefa/Tarefa';
 import useData from '../../../hooks/useData';
 
 const ListarProjetos = () => {
-    const { infos, handleDelete } = useData({ api: 'Project/Active', deleteEndpoint: 'Project' });
+    // Hook para projetos
+    const { infos: projetos, handleDelete: handleDeleteProjeto } = useData({ api: 'Project/Active', deleteEndpoint: 'Project' });
+    // Hook para tarefas
+    const { handleDelete: handleDeleteTarefa } = useData({ api: 'Tarefa', deleteEndpoint: 'Tarefa' });
+
     const [visibleTasks, setVisibleTasks] = useState({});
 
     const VerTarefas = (projectId) => {
@@ -19,20 +23,26 @@ const ListarProjetos = () => {
         }));
     };
 
-    const handleDeleteProject = async (id) => {
-        await handleDelete(id);
+    const handleDeletarTarefa = async (id) => {
+        await handleDeleteTarefa(id);
     };
 
-    if (!infos.length) {
+    const handleDeletarProjeto = async (id) => {
+        await handleDeleteProjeto(id);
+    };
+
+    if (!projetos.length) {
         return <div>Carregando...</div>;
     }
+
+    console.log(projetos)
 
     return (
         <div className='container-lista-projeto'>
             <h2>Lista de Projetos</h2>
             <div className='listar-projetos'>
-                {infos.length > 0 ? (
-                    infos.map((project) => (
+                {projetos.length > 0 ? (
+                    projetos.map((project) => (
                         <div key={project.id} className="card">
                             <div className="card__wrapper">
                                 <div className="card___wrapper-acounts">
@@ -50,7 +60,7 @@ const ListarProjetos = () => {
                                 </div>
                                 <div className='controles'>
                                     <BotaoDelete
-                                        handleDelete={() => handleDeleteProject(project.id)}
+                                        handleDelete={() => handleDeletarProjeto(project.id)}
                                         objectId={project.id}
                                     />
                                     <div className="card__menu">
@@ -78,8 +88,8 @@ const ListarProjetos = () => {
                                                     name={tarefa.name}
                                                     collaborator={tarefa.collaborator}
                                                     status={tarefa.status}
-                                                    timetrackers={tarefa.timetrackers}
                                                     update={tarefa.updatedAt}
+                                                    handleDelete={handleDeletarTarefa}  
                                                 />
                                             ))
                                         ) : (

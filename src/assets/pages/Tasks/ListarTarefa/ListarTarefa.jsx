@@ -29,7 +29,7 @@ const ListarTarefa = () => {
     const handleDeleteTarefa = async (id) => {
         await handleDelete(id);
     };
-    console.log(infos)
+
 
     return (
         <div className="container-listar">
