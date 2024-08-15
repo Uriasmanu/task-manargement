@@ -1,66 +1,31 @@
-import { useContext, useEffect, useState } from 'react';
+
 import './_botaoPlay.scss';
 import PropTypes from 'prop-types';
-import { AuthContext } from '../../../context/AuthContext';
-import { jwtDecode } from 'jwt-decode';
-import useTimeTrackers from '../../../hooks/useTimeTrackers';
+import { useTracking } from '../../../context/TrackingContext';
 import axios from 'axios';
 
 const BotaoPlay = ({ tarefa }) => {
-    const { user } = useContext(AuthContext);
-    const { collaborators } = useTimeTrackers();
-    const [isTracking, setIsTracking] = useState(false);
-    const [selectedCollaboratorId, setSelectedCollaboratorId] = useState(null);
+    const { activeTask, startTracking, stopTracking } = useTracking();
+    const isTracking = activeTask === tarefa;
 
     const handleClick = () => {
-        if (!selectedCollaboratorId) {
-            console.error('Nenhum colaborador selecionado');
-            return;
+        if (isTracking) {
+            stopTracking();
+        } else {
+            startTracking(tarefa);
+            const currentTimeUTC = new Date().toISOString();
+            axios.post('https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/TimeTracker/start', {
+                startTime: currentTimeUTC,
+                tarefasId: tarefa,
+                createdAt: currentTimeUTC
+            }).catch(error => {
+                console.error('Erro na requisição:', error.response ? error.response.data : error.message);
+            });
         }
-
-        if (!tarefa) {
-            console.error('ID da tarefa não fornecido');
-            return;
-        }
-
-        // Obtém a hora atual no formato UTC
-        const currentTimeUTC = new Date().toISOString(); 
-        
-        setIsTracking(!isTracking);
-
-
-
-        axios.post('https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/TimeTracker/start', {
-            startTime: currentTimeUTC,
-            tarefasId: tarefa,
-            collaboratorId: selectedCollaboratorId,
-            createdAt: currentTimeUTC
-        })
-        
-        .catch(error => {
-            console.error('Erro na requisição:', error.response ? error.response.data : error.message);
-        });
     };
-
-    useEffect(() => {
-        if (user && user.token) {
-            try {
-                jwtDecode(user.token);
-            } catch (error) {
-                console.error('Erro ao decodificar o token:', error);
-            }
-        }
-    }, [user]);
-
-    useEffect(() => {
-        if (collaborators && collaborators.length > 0) {
-            setSelectedCollaboratorId(collaborators[0].id);
-        }
-    }, [collaborators]);
 
     return (
         <div className="container">
-            
             <label className="switch">
                 <input type="checkbox" checked={isTracking} onChange={handleClick} />
                 <span className="slider">
@@ -96,7 +61,6 @@ const BotaoPlay = ({ tarefa }) => {
 
 BotaoPlay.propTypes = {
     tarefa: PropTypes.string.isRequired,
-    collaboratorID: PropTypes.string,
 };
 
 export default BotaoPlay;
