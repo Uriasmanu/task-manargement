@@ -1,44 +1,62 @@
 .container-Adim {
   display: flex;
-  main {
+  gap: 5%;
+  height: 100vh;
+  padding-right: 10%;
+  box-sizing: border-box;
+  width: 100vw;
+
+  .topo {
+    display: none;
+  }
+
+  .header {
+    width: 40%;
+    height: 100vh;
+  }
+
+  .main {
+    top: 15%;
+    width: 98%;
+    height: 100vh;
+    padding: 2% 5%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    height: 100vh;
-    padding: 2%;
+    gap: 5%;
 
-    .container-button {
-      display: flex;
-      flex-direction: column;
-      gap: 5%;
-      width: 50%;
-      height: 25%;
-      padding: 5%;
+    &.hidden {
+      opacity: 0;
+      display: none;
+    }
+  }
+  .container-button {
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+    width: 50%;
+    height: 25%;
+    padding: 5%;
 
-      .button {
-        padding: 15px 20px;
-        border: none;
-        outline: none;
-        background-color: #151515;
-        color: #eee;
-        border-radius: 7px;
-        font-weight: 600;
-        font-size: 1.5rem;
-        cursor: pointer;
-        transition: all 0.25s ease-out;
-        
-      }
-
-      .button:hover {
-        transform: translateY(-3px);
-      }
-
-      .button-span {
-        color: #aaa;
-      }
+    .button {
+      padding: 15px 20px;
+      border: none;
+      outline: none;
+      background-color: #151515;
+      color: #eee;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.25s ease-out;
     }
 
-    
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    .button-span {
+      color: #aaa;
+    }
   }
 }
