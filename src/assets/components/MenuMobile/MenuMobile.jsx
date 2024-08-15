@@ -6,10 +6,10 @@ const MenuMobile = ({ onClick }) => {
     return (
         <button >
             <input id="checkbox" type="checkbox" onClick={onClick}/>
-                <label className="toggle" for="checkbox">
-                    <div id="bar1" class="bars"></div>
-                    <div id="bar2" class="bars"></div>
-                    <div id="bar3" class="bars"></div>
+                <label className="toggle" htmlFor="checkbox">
+                    <div id="bar1" className="bars"></div>
+                    <div id="bar2" className="bars"></div>
+                    <div id="bar3" className="bars"></div>
                 </label>
         </button>
 

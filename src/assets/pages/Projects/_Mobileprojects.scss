@@ -1,0 +1,60 @@
+.container-projetos {
+    display: flex;
+        gap: 5%;
+        height: 120vh;
+        box-sizing: border-box;
+        width: 100vw;
+        flex-direction: column;
+        padding: 3% 5%;
+
+    .topo {
+        display: block;
+        height: 5%;
+    }
+
+    .header {
+        width: 100%;
+        height: 100vh;
+        opacity: 1;
+        transform: translateX(-100%);
+        transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+        overflow: hidden;
+
+        &.visible {
+            transform: translateX(0);
+        }
+    }
+
+    .main {
+        transition: opacity 300ms ease-in-out;
+        position: absolute;
+        top: 15%;
+        width: 98%;
+        height: 100vh;
+        padding: 2% 5%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5%;
+
+        &.hidden {
+            opacity: 0;
+            display: none;
+        }
+
+        &.visible {
+            opacity: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+
+            h2 {
+                border-bottom: 1px solid black;
+                width: 98%;
+                text-align: center;
+                padding: 2%;
+                font-size: 1.5rem;
+            }
+        }
+    }
+}
