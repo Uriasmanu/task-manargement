@@ -21,7 +21,7 @@ const Auth = () => {
 
   return (
     <>
-      <form className="form" onSubmit={handleLogin}>
+      <form className="form-auth" onSubmit={handleLogin}>
         <p id="heading">Login</p>
         <div className="field">
           <svg className="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">

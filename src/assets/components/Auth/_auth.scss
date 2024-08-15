@@ -1,6 +1,6 @@
 @import '../../styles/styleBase';
 
-    .form {
+    .form-auth {
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -17,7 +17,7 @@
       }
     }
 
-    .form:hover {
+    .form-auth:hover {
       border: 1px solid black;
     }
 
@@ -56,7 +56,7 @@
       color: #d3d3d3;
     }
 
-    .form .btn {
+    .form-auth .btn {
       display: flex;
       justify-content: center;
       flex-direction: row;
