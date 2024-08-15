@@ -9,7 +9,7 @@ import Tarefa from '../../../components/Tarefa/Tarefa';
 import useData from '../../../hooks/useData';
 
 const Projects = () => {
-    const { infos, handleDelete } = useData({ api: 'Project/Active', deleteEndpoint: 'Project/Active' });
+    const { infos, handleDelete } = useData({ api: 'Project/Active', deleteEndpoint: 'Project' });
     const [visibleTasks, setVisibleTasks] = useState({});
 
     const VerTarefas = (projectId) => {
@@ -28,9 +28,9 @@ const Projects = () => {
     }
 
     return (
-        <div>
+        <div className='container-lista-projeto'>
             <h2>Lista de Projetos</h2>
-            <div className='container-lista-projeto'>
+            <div className='listar-projetos'>
                 {infos.length > 0 ? (
                     infos.map((project) => (
                         <div key={project.id} className="card">
