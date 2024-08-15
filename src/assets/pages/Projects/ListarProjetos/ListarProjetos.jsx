@@ -35,7 +35,6 @@ const ListarProjetos = () => {
         return <div>Carregando...</div>;
     }
 
-    console.log(projetos)
 
     return (
         <div className='container-lista-projeto'>
