@@ -85,9 +85,29 @@
 
 .switch .slider .ball .icon {
   position: absolute;
-  top: 58%;
+  top: 55%;
   left: 53%;
   transform: translate(-50%, -50%);
   color: #313033;
   font-size: 12px;
+}
+
+@media (max-width: 768px) {
+  .switch {
+    font-size: 0.875rem;
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 27px;
+  }
+
+  .switch .slider .ball {
+    background-color: #fff;
+    height: 27px;
+        width: 27px;
+    border-radius: 50%;
+    position: absolute;
+    left: -1px;
+    transition: 0.4s;
+  }
 }
