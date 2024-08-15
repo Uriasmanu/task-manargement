@@ -1,20 +1,28 @@
 .container-projetos{
     display: flex;
+    gap: 5%;
+    height: 100vh;
+    padding-right: 10%;
     box-sizing: border-box;
+    width: 100vw;
 
-  
-    main{
-        width: 98%;
+    .topo {
+        display: none;
+    }
+
+    .header {
+        width: 40%;
         height: 100vh;
-        padding: 2% 2%;
+    }
+
+    .main {
         display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 5%;
         flex-direction: column;
-        
-
-
+        gap: 5%;
+        height: 100vh;
+        padding: 2% 0;
+        width: 100%;
+  
         h2{
             border-bottom: 1px black solid;
             width: 98%;
