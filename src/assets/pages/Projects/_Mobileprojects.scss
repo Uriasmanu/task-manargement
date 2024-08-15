@@ -51,6 +51,7 @@
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
+        flex-direction: column;
 
         h2 {
           border-bottom: 1px solid black;
@@ -58,6 +59,36 @@
           text-align: center;
           padding: 2%;
           font-size: 1.5rem;
+        }
+
+        .container-button {
+          display: flex;
+          flex-direction: column;
+          gap: 5%;
+          width: auto;
+          height: 25%;
+          padding: 5%;
+  
+          .button {
+            padding: 15px 20px;
+            border: none;
+            outline: none;
+            background-color: #151515;
+            color: #eee;
+            border-radius: 7px;
+            font-weight: 600;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.25s ease-out;
+          }
+  
+          .button:hover {
+            transform: translateY(-3px);
+          }
+  
+          .button-span {
+            color: #aaa;
+          }
         }
       }
     }
