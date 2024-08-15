@@ -36,9 +36,7 @@ const BotaoPlay = ({ tarefa }) => {
             collaboratorId: selectedCollaboratorId,
             createdAt: currentTimeUTC
         })
-        .then(response => {
-            console.log('Requisição bem-sucedida:', response.data);
-        })
+        
         .catch(error => {
             console.error('Erro na requisição:', error.response ? error.response.data : error.message);
         });

@@ -1,21 +1,21 @@
 import Header from '../../components/Header/Header';
 import "./_dashbord.scss";
 import "./_Mobiledashbord.scss";
-import done from '../../imagens/gostar.png';
 import relogio from '../../imagens/relogio.png';
-import aumentar from '../../imagens/aumentar.png';
 import Dia from '../../components/Dia';
 import { jwtDecode } from "jwt-decode";
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import MenuMobile from '../../components/MenuMobile/MenuMobile';
+import useRelatorio from '../../hooks/useRelatorio';
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext);
     const [payload, setPayload] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isDashboardVisible, setIsDashboardVisible] = useState(true);
-
+    const { data, loading: relatorioLoading, error, dailyTime, monthlyTime } = useRelatorio();
+console.log(data)
     useEffect(() => {
         if (user && user.token) {
             try {
@@ -37,8 +37,12 @@ const Dashboard = () => {
         }
     }, [user]);
 
-    if (loading) {
+    if (loading || relatorioLoading) {
         return <p>Carregando...</p>;
+    }
+
+    if (error) {
+        return <p>Erro ao carregar os dados.</p>;
     }
 
     const toggleVisibility = () => {
@@ -65,27 +69,7 @@ const Dashboard = () => {
                 </div>
 
                 <div className="container-indicadores">
-                    <div className="indicadores">
-                        <img src={done} alt="Finalizados" />
-                        <div>
-                            <p>Finalizados</p>
-                            <p>tempo</p>
-                        </div>
-                    </div>
-                    <div className="indicadores">
-                        <img src={relogio} alt="Progresso" />
-                        <div>
-                            <p>Progresso</p>
-                            <p>tempo</p>
-                        </div>
-                    </div>
-                    <div className="indicadores">
-                        <img src={aumentar} alt="Eficiencia" />
-                        <div>
-                            <p>Eficiencia</p>
-                            <p>tempo</p>
-                        </div>
-                    </div>
+                    {/* Adicione indicadores se necessário */}
                 </div>
 
                 <div className="card-tempo">
@@ -98,7 +82,7 @@ const Dashboard = () => {
                                 <h3>Tempo Gasto hoje.</h3>
                             </div>
                         </div>
-                        <p>1h30</p>
+                        <p>{dailyTime.toFixed(2)}h</p>
                     </div>
 
                     <div className="card">
@@ -110,10 +94,9 @@ const Dashboard = () => {
                                 <h3>Tempo Gasto este mês.</h3>
                             </div>
                         </div>
-                        <p>1h30</p>
+                        <p>{monthlyTime.toFixed(2)}h</p>
                     </div>
                 </div>
-
             </div>
         </div>
     );

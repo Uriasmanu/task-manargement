@@ -9,7 +9,7 @@ const ListarTarefa = () => {
     const ExtrairHora = (tempo) => {
         const date = new Date(tempo);
         // Subtrai 4 horas
-        date.setHours(date.getHours() - 4);
+        date.setHours(date.getHours() - 3);
         const hours = String(date.getHours()).padStart(2, '0');
         const minutes = String(date.getMinutes()).padStart(2, '0');
 
@@ -26,6 +26,7 @@ const ListarTarefa = () => {
     const handleDeleteTarefa= async (id) => {
         await handleDelete(id);
     };
+    console.log(infos)
 
     return (
         <div className="container-listar">
