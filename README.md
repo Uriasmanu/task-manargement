@@ -10,7 +10,6 @@ Este é um sistema de controle de tarefas com apontamento de horas, desenvolvido
 - *Visualização do Tempo Gasto no Dia Corrente*
 - *Visualização do Tempo Gasto no Mês Corrente*
 - *Associação de Colaboradores a Tarefas*
-- *Apontamento de Tempo Gasto nas Tarefas*
 - *Autenticação com JWT*
 - *Responsividade*
 
