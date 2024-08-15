@@ -3,7 +3,6 @@ import './_Mobiletask.scss';
 import PropTypes from 'prop-types';
 import tarefa from '../../imagens/splitscreen.svg';
 import BotaoDelete from '../BotaoDelete/BotaoDelete';
-import useData from '../../hooks/useData';
 import BotaoPlay from './BotaoPlay/BotaoPlay';
 
 const TransformStatus = (status) => {
@@ -20,11 +19,10 @@ const TransformStatus = (status) => {
 }
 
 
-const Tarefa = ({ id, name, collaborator, status, timetrackersStart, timetrackersEnd, update, data }) => {
+const Tarefa = ({ id, name, collaborator, status, timetrackersStart, timetrackersEnd, update, data, handleDelete }) => {
     const { className, text } = TransformStatus(status);
-    const { infos, handleDelete } = useData({ api: 'Tarefa', deleteEndpoint: 'Tarefa' });
 
-    console.log(infos)
+
     return (
         <div className="cards-tarefas">
             <div className='informa'>
@@ -77,6 +75,7 @@ Tarefa.propTypes = {
     timetrackersEnd: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     data: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     update: PropTypes.string,
+    handleDelete: PropTypes.func.isRequired,
 };
 
 export default Tarefa;

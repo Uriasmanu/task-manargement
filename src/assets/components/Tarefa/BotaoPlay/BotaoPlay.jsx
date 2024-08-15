@@ -7,37 +7,47 @@ import useTimeTrackers from '../../../hooks/useTimeTrackers';
 import axios from 'axios';
 
 const BotaoPlay = ({ tarefa }) => {
-    const [payload, setPayload] = useState(null);
     const { user } = useContext(AuthContext);
     const { collaborators } = useTimeTrackers();
     const [isTracking, setIsTracking] = useState(false);
-    const [startTime, setStartTime] = useState(null);
-    const [selectedCollaboratorId, setSelectedCollaboratorId] = useState(null); 
-    
+    const [selectedCollaboratorId, setSelectedCollaboratorId] = useState(null);
+
     const handleClick = () => {
-        const currentTime = new Date().toISOString();
-        setStartTime(currentTime);
+        if (!selectedCollaboratorId) {
+            console.error('Nenhum colaborador selecionado');
+            return;
+        }
+
+        if (!tarefa) {
+            console.error('ID da tarefa não fornecido');
+            return;
+        }
+
+        // Obtém a hora atual no formato UTC
+        const currentTimeUTC = new Date().toISOString(); 
+        
         setIsTracking(!isTracking);
 
+
+
         axios.post('https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/TimeTracker/start', {
-            startTime: currentTime,
+            startTime: currentTimeUTC,
             tarefasId: tarefa,
-            collaboratorId: selectedCollaboratorId, // Use o colaborador selecionado
-            createdAt: currentTime
+            collaboratorId: selectedCollaboratorId,
+            createdAt: currentTimeUTC
         })
         .then(response => {
             console.log('Requisição bem-sucedida:', response.data);
         })
         .catch(error => {
-            console.error('Erro na requisição:', error);
+            console.error('Erro na requisição:', error.response ? error.response.data : error.message);
         });
     };
 
     useEffect(() => {
         if (user && user.token) {
             try {
-                const decodedToken = jwtDecode(user.token);
-                setPayload(decodedToken);
+                jwtDecode(user.token);
             } catch (error) {
                 console.error('Erro ao decodificar o token:', error);
             }
@@ -45,25 +55,14 @@ const BotaoPlay = ({ tarefa }) => {
     }, [user]);
 
     useEffect(() => {
-        if (collaborators) {
-            // Defina o ID do primeiro colaborador ou o ID desejado
-            if (collaborators.length > 0) {
-                setSelectedCollaboratorId(collaborators[0].id);
-            }
+        if (collaborators && collaborators.length > 0) {
+            setSelectedCollaboratorId(collaborators[0].id);
         }
     }, [collaborators]);
 
     return (
         <div className="container">
-            {collaborators && collaborators.map(collaborator => (
-                <div 
-                    key={collaborator.id} 
-                    onClick={() => setSelectedCollaboratorId(collaborator.id)} // Atualize o ID do colaborador selecionado ao clicar
-                    className={selectedCollaboratorId === collaborator.id ? 'selected' : ''}
-                >
-                    {collaborator.id}
-                </div>
-            ))}
+            
             <label className="switch">
                 <input type="checkbox" checked={isTracking} onChange={handleClick} />
                 <span className="slider">

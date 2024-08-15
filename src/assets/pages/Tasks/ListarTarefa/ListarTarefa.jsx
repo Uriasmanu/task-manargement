@@ -6,8 +6,10 @@ import Tarefa from '../../../components/Tarefa/Tarefa'
 const ListarTarefa = () => {
     const { infos, handleDelete } = useData({ api: 'Tarefa', deleteEndpoint: 'Tarefa' });
 
-    const ExtrairHora = (tempo) =>{
+    const ExtrairHora = (tempo) => {
         const date = new Date(tempo);
+        // Subtrai 4 horas
+        date.setHours(date.getHours() - 4);
         const hours = String(date.getHours()).padStart(2, '0');
         const minutes = String(date.getMinutes()).padStart(2, '0');
 
