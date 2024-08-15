@@ -7,6 +7,8 @@ const ListarTarefa = () => {
     const { infos, handleDelete } = useData({ api: 'Tarefa', deleteEndpoint: 'Tarefa' });
 
     const ExtrairHora = (tempo) => {
+        if (!tempo) return ''; // Retorna uma string vazia se tempo for null ou undefined
+
         const date = new Date(tempo);
         // Subtrai 4 horas
         date.setHours(date.getHours() - 3);
@@ -16,6 +18,7 @@ const ListarTarefa = () => {
         return `${hours}h${minutes}`;
     }
 
+
     const ExtrairDiaEMes = (dateTimeString) => {
         const date = new Date(dateTimeString);
         const day = String(date.getDate()).padStart(2, '0');
@@ -23,7 +26,7 @@ const ListarTarefa = () => {
         return `${day}/${month}`;
     }
 
-    const handleDeleteTarefa= async (id) => {
+    const handleDeleteTarefa = async (id) => {
         await handleDelete(id);
     };
     console.log(infos)
@@ -40,12 +43,14 @@ const ListarTarefa = () => {
                             name={tarefa.name}
                             collaborator={tarefa.collaborator}
                             status={tarefa.status}
-                            data = {tarefa.timeTrackers.length > 0 ? ExtrairDiaEMes(tarefa.timeTrackers[0].startTime) : 'Não disponível'}
+                            data={tarefa.timeTrackers.length > 0 ? ExtrairDiaEMes(tarefa.timeTrackers[0].startTime) : 'Não disponível'}
                             timetrackersStart={tarefa.timeTrackers.length > 0 ? ExtrairHora(tarefa.timeTrackers[0].startTime) : ''}
-                            timetrackersEnd={tarefa.timeTrackers.length > 0 ? ExtrairHora(tarefa.timeTrackers[0].endTime) : ''}
+                            timetrackersEnd={tarefa.timeTrackers.length > 0 ? ExtrairHora(tarefa.timeTrackers[0].endTime) : ''} 
                             update={tarefa.update}
                             handleDelete={handleDeleteTarefa}
                         />
+
+
                     ))
                 ) : (
                     <p>Não há Tarefas cadastradas.</p>

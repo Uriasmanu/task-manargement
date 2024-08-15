@@ -42,8 +42,8 @@ const Tarefa = ({ id, name, collaborator, status, timetrackersStart, timetracker
                     <p></p>
                 )}
                 <div className='console'>
-                <BotaoPlay tarefa={id} />
-                   
+                    <BotaoPlay tarefa={id} />
+
                     <BotaoDelete
                         handleDelete={() => handleDelete(id)}
                         objectId={id}
@@ -53,9 +53,10 @@ const Tarefa = ({ id, name, collaborator, status, timetrackersStart, timetracker
             <div className="timer">
                 <p>dia: {data}</p>
                 <div>
-                    <p>{timetrackersStart != null ? timetrackersStart : ""}</p>
+                    <p>{timetrackersStart || ""}</p>
                     <p>|</p>
-                    <p>{timetrackersEnd != null ? timetrackersEnd : ""}</p>
+                    <p>{timetrackersEnd || ""}</p>
+
                 </div>
             </div>
         </div>
