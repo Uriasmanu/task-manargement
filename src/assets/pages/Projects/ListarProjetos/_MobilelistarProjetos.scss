@@ -111,6 +111,16 @@
       }
     }
 
+
+  .listar-projetos {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 15px;
+    max-height: 700px; 
+    overflow-y: auto; 
+
+  }
     .card__wrapper {
       display: flex;
       flex-direction: row;
