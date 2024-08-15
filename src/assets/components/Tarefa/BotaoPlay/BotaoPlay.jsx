@@ -13,6 +13,7 @@ const BotaoPlay = ({ tarefa }) => {
     const { activeTask, startTracking, stopTracking } = useTracking();
     const [isTracking, setIsTracking] = useState(false);
     const [selectedCollaboratorId, setSelectedCollaboratorId] = useState(null);
+    
 
     const handleClick = () => {
         if (!selectedCollaboratorId) {
