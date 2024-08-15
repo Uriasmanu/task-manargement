@@ -115,13 +115,6 @@ const Dashboard = () => {
                     </div>
                 </div>
 
-                <div className='resumo-tarefas'>
-                    <div className='cabecalho'>
-                        <h4>Tarefas atuais</h4>
-                        <p>Tempo Total</p>
-                    </div>
-                    
-                </div>
             </div>
         </div>
     );
