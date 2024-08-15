@@ -23,6 +23,10 @@ const ListarTarefa = () => {
         return `${day}/${month}`;
     }
 
+    const handleDeleteTarefa= async (id) => {
+        await handleDelete(id);
+    };
+
     return (
         <div className="container-listar">
             <h2>Lista de Tarefas</h2>
@@ -39,7 +43,7 @@ const ListarTarefa = () => {
                             timetrackersStart={tarefa.timeTrackers.length > 0 ? ExtrairHora(tarefa.timeTrackers[0].startTime) : ''}
                             timetrackersEnd={tarefa.timeTrackers.length > 0 ? ExtrairHora(tarefa.timeTrackers[0].endTime) : ''}
                             update={tarefa.update}
-                            handleDelete={handleDelete}
+                            handleDelete={handleDeleteTarefa}
                         />
                     ))
                 ) : (
