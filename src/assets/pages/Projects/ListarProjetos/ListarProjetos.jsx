@@ -1,4 +1,6 @@
 import './_listarProjetos.scss';
+import './_MobilelistarProjetos.scss';
+
 import more from '../../../imagens/more.svg';
 import mais from '../../../imagens/stat_minus.svg';
 import { useState } from 'react';
