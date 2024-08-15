@@ -13,9 +13,10 @@ const BotaoPlay = ({ tarefa }) => {
     const { activeTask, startTracking, stopTracking } = useTracking();
     const [isTracking, setIsTracking] = useState(false);
     const [selectedCollaboratorId, setSelectedCollaboratorId] = useState(null);
-    
 
-    const handleClick = () => {
+    const currentTimeUTC = new Date().toISOString();
+
+    const handleClick = async () => {
         if (!selectedCollaboratorId) {
             console.error('Nenhum colaborador selecionado');
             return;
@@ -26,23 +27,41 @@ const BotaoPlay = ({ tarefa }) => {
             return;
         }
 
-        if (activeTask === tarefa) {
-            stopTracking();
-            setIsTracking(false);
-        } else {
-            startTracking(tarefa);
-            const currentTimeUTC = new Date().toISOString();
-            
-            axios.post('https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/TimeTracker/start', {
-                startTime: currentTimeUTC,
-                tarefasId: tarefa,
-                collaboratorId: selectedCollaboratorId,
-                createdAt: currentTimeUTC
-            }).catch(error => {
-                console.error('Erro na requisição:', error.response ? error.response.data : error.message);
-            });
+        try {
+            if (activeTask && activeTask !== tarefa) {
+                // Finalizar a tarefa ativa antes de iniciar a nova
+                await axios.post('https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/TimeTracker/End', {
+                    endTime: currentTimeUTC,
+                    tarefasId: activeTask,
+                    collaboratorId: selectedCollaboratorId,
+                    createdAt: currentTimeUTC,
+                });
+                stopTracking();
+            }
 
-            setIsTracking(true);
+            if (isTracking) {
+                // Finalizar a tarefa atual
+                await axios.post('https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/TimeTracker/End', {
+                    endTime: currentTimeUTC,
+                    tarefasId: tarefa,
+                    collaboratorId: selectedCollaboratorId,
+                    createdAt: currentTimeUTC,
+                });
+                stopTracking();
+                setIsTracking(false);
+            } else {
+                // Iniciar nova tarefa
+                await axios.post('https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/TimeTracker/start', {
+                    startTime: currentTimeUTC,
+                    tarefasId: tarefa,
+                    collaboratorId: selectedCollaboratorId,
+                    createdAt: currentTimeUTC,
+                });
+                startTracking(tarefa);
+                setIsTracking(true);
+            }
+        } catch (error) {
+            console.error('Erro na requisição:', error.response ? error.response.data : error.message);
         }
     };
 

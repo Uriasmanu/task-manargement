@@ -4,7 +4,7 @@
     display: flex;
     gap: 5%;
     height: 100vh;
-    padding-right: 10%;
+    padding-right: 15%;
     box-sizing: border-box;
     width: 100vw;
 
@@ -13,16 +13,17 @@
     }
 
     .header {
-        width: 40%;
+        width: 350px;
         height: 100vh;
     }
 
-    .main {
+    .main.visible {
         display: flex;
         flex-direction: column;
         gap: 5%;
         height: 100vh;
         padding: 2% 0;
+        width: 90%;
 
         .apresentacao {
             display: flex;
@@ -79,7 +80,7 @@
 
 
             .card {
-                width: 320px;
+                width: 70%;
                 background: #fff480;
                 color: black;
                 position: relative;
@@ -88,6 +89,7 @@
                 transition: transform 0.4s ease;
                 display: flex;
                 flex-direction: column;
+                height: auto;
 
                 p {
                     align-self: center;
