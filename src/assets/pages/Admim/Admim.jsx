@@ -8,17 +8,22 @@ import ListarUsers from "./ListarUsers/ListarUsers";
 import Sucesso from "../../components/sucesso/sucesso";
 import MenuMobile from "../../components/MenuMobile/MenuMobile";
 
-
+/**
+ * Componente de administração que permite alternar entre diferentes visualizações
+ * e controlar a visibilidade de uma área do dashboard.
+ */
 const Admim = () => {
     const [success, setSuccess] = useState(false);
-    const [view, setView] = useState('register'); 
+    const [view, setView] = useState('lista');
 
+
+    //Manipulador para ocultar a mensagem de sucesso.
     const handleDismiss = () => {
         setSuccess(false);
     };
 
     const handleListUsers = () => {
-        setView('list');
+        setView('lista');
     };
 
     const handleRegister = () => {
@@ -50,7 +55,7 @@ const Admim = () => {
                         ─ Registre um novo usuário
                     </button>
                 </div>
-                {view === 'list' ? (
+                {view === 'lista' ? (
                     <ListarUsers />
                 ) : (
                     <>
@@ -61,7 +66,7 @@ const Admim = () => {
                         )}
                     </>
                 )}
-           </div>
+            </div>
         </div>
     );
 };

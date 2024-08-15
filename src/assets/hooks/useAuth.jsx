@@ -1,13 +1,35 @@
 import { useState } from 'react';
 import axios from 'axios';
 
+
+/**
+ * Hook personalizado para autenticação do usuário.
+ * Fornece funções para login, logout e gerencia o estado do usuário.
+ *
+ * @returns {Object} Objeto contendo:
+ *   - {Object|null} user - Informações do usuário logado ou null se não estiver logado.
+ *   - {string|null} error - Mensagem de erro se ocorrer, ou null se não houver erro.
+ *   - {Function} login - Função para autenticar o usuário.
+ *   - {Function} logout - Função para deslogar o usuário.
+ */
 const useAuth = () => {
   const [user, setUser] = useState(() => {
+
+    // Estado para armazenar informações do usuário logado, inicializado com o token do localStorage
     const token = localStorage.getItem('authToken');
     return token ? { token } : null;
   });
   const [error, setError] = useState(null);
 
+
+  /**
+ * Função para realizar o login do usuário.
+ * Faz uma requisição POST para autenticar o usuário e armazena o token no localStorage.
+ *
+ * @param {string} login - Nome de usuário ou e-mail.
+ * @param {string} password - Senha do usuário.
+ * @returns {boolean} Retorna true se o login for bem-sucedido, caso contrário retorna false.
+ */
   const login = async (login, password) => {
     try {
       const response = await axios.post('https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/conta/login', {

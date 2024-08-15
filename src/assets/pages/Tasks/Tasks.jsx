@@ -9,17 +9,23 @@ import MenuMobile from "../../components/MenuMobile/MenuMobile";
 
 
 const Tasks = () => {
+    // Estado para controlar a visão atual (registro ou lista de tarefas)
     const [view, setView] = useState('register');
 
+    // Altera a visão atual para 'list', exibindo a lista de tarefas.
     const handleListTarefa = () => {
         setView('list');
     };
 
+    // Altera a visão atual para 'register', exibindo o formulário de registro de tarefa.
     const handleRegisterTarefa = () => {
         setView('register');
     };
+
+    // Estado para controlar a visibilidade do dashboa
     const [isDashboardVisible, setIsDashboardVisible] = useState(true);
 
+    // Se o dashboard estiver visível, ele será ocultado e vice-versa.
     const toggleVisibility = () => {
         setIsDashboardVisible(prevState => !prevState);
     };
@@ -48,7 +54,7 @@ const Tasks = () => {
                 ) : (
                     <RegisterTarefa />
                 )}
-           </div>
+            </div>
         </div>
     )
 }

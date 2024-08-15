@@ -1,46 +1,51 @@
+Claro! Aqui está uma versão revisada e aprimorada do seu README:
+
+---
+
 # Task Management System
 
-Este é um sistema de controle de tarefas com apontamento de horas, desenvolvido utilizando React no frontend, C# com ASP.NET Core no backend, e Entity Framework Core para acesso ao banco de dados. O sistema permite o cadastro e gerenciamento de tarefas e projetos, além do apontamento de horas trabalhadas.
+O **Task Management System** é uma aplicação para controle de tarefas e gerenciamento de projetos. Desenvolvido com React para o frontend, C# com ASP.NET Core para o backend e Entity Framework Core para acesso ao banco de dados, o sistema oferece uma solução completa para o rastreamento de horas trabalhadas e gerenciamento de tarefas.
 
 ## Funcionalidades
 
-- *Cadastro de Tarefas (CRUD)*
-- *Cadastro de Projetos (CRUD)*
-- *Listagem de Tarefas*
-- *Visualização do Tempo Gasto no Dia Corrente*
-- *Visualização do Tempo Gasto no Mês Corrente*
-- *Associação de Colaboradores a Tarefas*
-- *Autenticação com JWT*
-- *Responsividade*
+- **Cadastro de Tarefas**: Criação, leitura, atualização e exclusão (CRUD) de tarefas.
+- **Cadastro de Projetos**: Criação, leitura, atualização e exclusão (CRUD) de projetos.
+- **Listagem de Tarefas**: Visualize todas as tarefas cadastradas.
+- **Visualização de Tempo Gasto**:
+  - No dia corrente
+  - No mês corrente
+- **Associação de Colaboradores**: Atribua colaboradores às tarefas.
+- **Autenticação Segura**: Utiliza JSON Web Tokens (JWT) para autenticação.
+- **Responsividade**: Interface adaptável para diferentes dispositivos.
 
 ## Requisitos de Negócio
 
-1. *Tabelas de Banco de Dados:*
-    - Users
-    - Projects
-    - Collaborators
-    - Tasks
-    - TimeTrackers
+1. **Estrutura de Banco de Dados**:
+    - `Users`
+    - `Projects`
+    - `Collaborators`
+    - `Tasks`
+    - `TimeTrackers`
 
-2. *Regras de Negócio:*
-    - Username deve ser único
-    - Password deve ser criptografado
-    - Não é possível incluir um time tracker que colida o intervalo de tempo
-    - Uma task deve ter associação a um projeto
-    - Uma task pode ter vários time trackers
-    - O tempo de início deve ser menor ou igual ao término
-    - O time zone local deve ser enviado na requisição de inclusão do tempo
-    - Validação de campos no frontend e backend
-    - O total de horas em tasks dentro de um dia não deve ultrapassar 24 horas
+2. **Regras de Negócio**:
+    - O nome de usuário deve ser único.
+    - As senhas devem ser criptografadas.
+    - Não é permitido registrar um time tracker que se sobreponha a um intervalo de tempo existente.
+    - Cada tarefa deve estar associada a um projeto.
+    - Uma tarefa pode ter múltiplos time trackers.
+    - O horário de início deve ser menor ou igual ao horário de término.
+    - O fuso horário local deve ser especificado na requisição para inclusão do tempo.
+    - Validação de campos deve ser realizada tanto no frontend quanto no backend.
+    - O total de horas registradas em tarefas em um único dia não deve exceder 24 horas.
 
+## Documentação e Deploy
 
+- **API Documentation**: Acesse a documentação da API [aqui](https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net) com suporte a Swagger.
+- **Frontend Deployment**: Disponível através do Vercel e Netlify.
 
-### Passos para Configuração
+## Recursos Utilizados
 
-1. *Clone o Repositório:*
-   sh
-   git clone https://github.com/usuario/task-management-system.git
-   cd task-management-system
-   
-    
-     
+- Modelos e design de UI do [uiverce.io](https://uiverce.io).
+
+---
+

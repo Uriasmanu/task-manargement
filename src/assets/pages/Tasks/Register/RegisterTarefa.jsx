@@ -1,26 +1,45 @@
 import './_registerTarefa.scss';
 import './_MobileregisterTarefa.scss';
 
-import useTask from '../../../hooks/useTasks'; 
+import useTask from '../../../hooks/useTasks';
 import { useState, useEffect } from 'react';
 import Sucesso from '../../../components/sucesso/sucesso';
 import useData from '../../../hooks/useData';
 
+/**
+ * Componente para registrar uma nova tarefa.
+ * Utiliza o hook `useTask` para registrar a tarefa e o hook `useData` para obter informações de projetos.
+ */
+
 const RegisterTarefa = () => {
-    const { registrarTarefa, error } = useTask(); 
+
+    // Hook personalizado para registrar a tarefa e capturar possíveis erros
+    const { registrarTarefa, error } = useTask();
+
+    // Estados para armazenar os dados do formulário e mensagens de feedback
     const [nome, setNome] = useState('');
     const [descritiva, setDescritiva] = useState('');
-    const [projetoId, setProjetoId] = useState(''); 
+    const [projetoId, setProjetoId] = useState('');
     const [showError, setShowError] = useState(false);
     const [success, setSuccess] = useState(false);
 
+    // Hook personalizado para obter a lista de projetos ativos
     const { infos } = useData({ api: 'Project/Active' });
+
+
+    /**
+    * Manipulador de envio do formulário.
+    * Faz o registro da tarefa e trata o feedback de sucesso ou erro.
+    * 
+    * @param {Event} event - O evento de submissão do formulário.
+    */
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log('Submitting form:', { nome, descritiva, projetoId });
+
         try {
-            await registrarTarefa(nome, descritiva, projetoId); 
+            await registrarTarefa(nome, descritiva, projetoId);
             setSuccess(true);
             setNome('');
             setDescritiva('');
@@ -31,10 +50,12 @@ const RegisterTarefa = () => {
         }
     };
 
+    //Manipulador para ocultar a mensagem de sucesso.
     const handleDismiss = () => {
         setSuccess(false);
     };
 
+    //Efeito colateral para ocultar a mensagem de erro após um tempo.
     useEffect(() => {
         if (showError) {
             const timer = setTimeout(() => {
@@ -54,8 +75,8 @@ const RegisterTarefa = () => {
                     <form className="form" onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="projetos">Escolha um projeto:</label>
-                            <select 
-                                name="projetos" 
+                            <select
+                                name="projetos"
                                 value={projetoId}
                                 onChange={(e) => setProjetoId(e.target.value)}
                             >
@@ -73,7 +94,7 @@ const RegisterTarefa = () => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="nome">Nome da Tarefa</label>
-                            <input 
+                            <input
                                 required
                                 className="input"
                                 type="text"
@@ -84,10 +105,10 @@ const RegisterTarefa = () => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="descritiva">Descrição</label>
-                            <textarea 
+                            <textarea
                                 required
-                                cols="50" 
-                                rows="10" 
+                                cols="50"
+                                rows="10"
                                 name="descritiva"
                                 className="input"
                                 placeholder="Descrição"

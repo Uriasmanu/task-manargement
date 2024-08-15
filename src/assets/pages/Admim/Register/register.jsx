@@ -1,17 +1,32 @@
 import { useState, useEffect } from 'react';
 import './_register.scss';
-import useRegister from '../../../hooks/useRegister';
+
 import Sucesso from '../../../components/sucesso/sucesso';
+import useRegisterUsuario from '../../../hooks/useRegisterUsuario';
 
-
+/**
+ * Componente de registro de usuário.
+ * Permite que um novo usuário se registre com login e senha,
+ * e exibe mensagens de sucesso ou erro com base na resposta.
+ */
 
 const Register = () => {
-  const { register, error } = useRegister();
+  const { register, error } = useRegisterUsuario();
+
+  // Estados para armazenar os dados do formulário e mensagens de status
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [showError, setShowError] = useState(false);
   const [success, setSuccess] = useState(false);
 
+
+  /**
+   * Manipulador de envio do formulário.
+   * Impede o comportamento padrão do formulário e tenta registrar o usuário.
+   * Exibe uma mensagem de sucesso se o registro for bem-sucedido ou uma mensagem de erro em caso contrário.
+   * 
+   * @param {Event} event - O evento de submissão do formulário.
+   */
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -23,7 +38,7 @@ const Register = () => {
   };
 
   const handleDismiss = () => {
-    setSuccess(false); 
+    setSuccess(false);
   };
 
   useEffect(() => {

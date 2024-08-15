@@ -1,6 +1,15 @@
 import { useState } from 'react';
 import axios from 'axios';
 
+
+/**
+ * Hook personalizado para criar projetos.
+ * Faz a requisição para a API para criar um novo projeto e gerencia erros que possam ocorrer.
+ *
+ * @returns {Object} Objeto contendo:
+ *   - {Function} createProject - Função para criar um novo projeto.
+ *   - {string|null} error - Mensagem de erro, se ocorrer.
+ */
 const useProject = () => {
   const [error, setError] = useState(null);
 

@@ -8,14 +8,20 @@ import { useTracking } from '../../../context/TrackingContext';
 import axios from 'axios';
 
 const BotaoPlay = ({ tarefa }) => {
-    const { user } = useContext(AuthContext);
+    const { user } = useContext(AuthContext); // Obtém o usuário autenticado do contexto para buscar o colaborador
     const { collaborators } = useTimeTrackers();
-    const { activeTask, startTracking, stopTracking } = useTracking();
-    const [isTracking, setIsTracking] = useState(false);
+    const { activeTask, startTracking, stopTracking } = useTracking(); // Obtém informações sobre a tarefa ativa e funções para iniciar e parar o rastreamento do hook useTracking
+    const [isTracking, setIsTracking] = useState(false); // Estado para controlar se a tarefa está sendo rastreada
     const [selectedCollaboratorId, setSelectedCollaboratorId] = useState(null);
 
+    // Obtém a hora atual no formato UTC
     const currentTimeUTC = new Date().toISOString();
 
+
+    /**
+    * Função para lidar com o clique do botão.
+    * Inicia ou para o rastreamento da tarefa com base no estado atual.
+    */
     const handleClick = async () => {
         if (!selectedCollaboratorId) {
             console.error('Nenhum colaborador selecionado');
@@ -28,8 +34,8 @@ const BotaoPlay = ({ tarefa }) => {
         }
 
         try {
+            // Se houver uma tarefa ativa e não for a tarefa atual, finaliza a tarefa ativa
             if (activeTask && activeTask !== tarefa) {
-                // Finalizar a tarefa ativa antes de iniciar a nova
                 await axios.post('https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/TimeTracker/End', {
                     endTime: currentTimeUTC,
                     tarefasId: activeTask,
@@ -39,8 +45,9 @@ const BotaoPlay = ({ tarefa }) => {
                 stopTracking();
             }
 
+            // Se a tarefa está sendo rastreada, finaliza a tarefa atual
             if (isTracking) {
-                // Finalizar a tarefa atual
+
                 await axios.post('https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/TimeTracker/End', {
                     endTime: currentTimeUTC,
                     tarefasId: tarefa,
@@ -50,7 +57,8 @@ const BotaoPlay = ({ tarefa }) => {
                 stopTracking();
                 setIsTracking(false);
             } else {
-                // Iniciar nova tarefa
+
+                // Caso contrário, inicia uma nova tarefa
                 await axios.post('https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/TimeTracker/start', {
                     startTime: currentTimeUTC,
                     tarefasId: tarefa,

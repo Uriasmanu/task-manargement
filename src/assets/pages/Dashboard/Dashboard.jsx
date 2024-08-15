@@ -9,13 +9,28 @@ import { AuthContext } from '../../context/AuthContext';
 import MenuMobile from '../../components/MenuMobile/MenuMobile';
 import useRelatorio from '../../hooks/useRelatorio';
 
+
+/**
+ * Componente que exibe dados do relatório e gerencia a visibilidade do dashboard.
+ * Utiliza contexto de autenticação e hook personalizado para relatar dados.
+ */
+
 const Dashboard = () => {
+
+    // Obtém o usuário do contexto de autenticação
     const { user } = useContext(AuthContext);
-    const [payload, setPayload] = useState(null);
+
+    // Estados para armazenar o payload do token, estado de carregamento e visibilidade do dashboard
+    const [payload, setPayload] = useState(null); // Armazena o payload decodificado do token
     const [loading, setLoading] = useState(true);
     const [isDashboardVisible, setIsDashboardVisible] = useState(true);
     const { data, loading: relatorioLoading, error, dailyTime, monthlyTime } = useRelatorio();
-console.log(data)
+
+
+    /**
+    * Efeito colateral para decodificar o token JWT e definir o payload.
+    * Executa quando o usuário muda.
+    */
     useEffect(() => {
         if (user && user.token) {
             try {
@@ -31,6 +46,10 @@ console.log(data)
         }
     }, [user]);
 
+    /**
+     * Efeito colateral para recarregar a página se o usuário não estiver autenticado.
+     * Executa quando o usuário muda.
+     */
     useEffect(() => {
         if (!user) {
             window.location.reload();
@@ -45,6 +64,10 @@ console.log(data)
         return <p>Erro ao carregar os dados.</p>;
     }
 
+    /**
+    * Alterna a visibilidade do dashboard.
+    * Se o dashboard estiver visível, será ocultado e vice-versa.
+    */
     const toggleVisibility = () => {
         setIsDashboardVisible(prevState => !prevState);
     };

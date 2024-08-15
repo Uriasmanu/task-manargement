@@ -11,7 +11,8 @@ import useData from '../../../hooks/useData';
 const ListarProjetos = () => {
     // Hook para projetos
     const { infos: projetos, handleDelete: handleDeleteProjeto } = useData({ api: 'Project/Active', deleteEndpoint: 'Project' });
-    // Hook para tarefas
+
+    // Hook personalizado para lidar com a exclusão de tarefas
     const { handleDelete: handleDeleteTarefa } = useData({ api: 'Tarefa', deleteEndpoint: 'Tarefa' });
 
     const [visibleTasks, setVisibleTasks] = useState({});
@@ -23,10 +24,12 @@ const ListarProjetos = () => {
         }));
     };
 
+    //Manipulador para excluir uma tarefa com base no seu ID.
     const handleDeletarTarefa = async (id) => {
         await handleDeleteTarefa(id);
     };
 
+    //Manipulador para excluir um projeto com base no seu ID.
     const handleDeletarProjeto = async (id) => {
         await handleDeleteProjeto(id);
     };
@@ -88,7 +91,7 @@ const ListarProjetos = () => {
                                                     collaborator={tarefa.collaborator}
                                                     status={tarefa.status}
                                                     update={tarefa.updatedAt}
-                                                    handleDelete={handleDeletarTarefa}  
+                                                    handleDelete={handleDeletarTarefa}
                                                 />
                                             ))
                                         ) : (

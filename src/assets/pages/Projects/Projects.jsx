@@ -7,11 +7,17 @@ import './_Mobileprojects.scss';
 import Sucesso from "../../components/sucesso/sucesso";
 import ProjectForm from "./ProjectForm/ProjectForm";
 
-
+/**
+ * Componente para gerenciar projetos.
+ * Permite alternar entre diferentes visões (registro e lista) e controlar a visibilidade do dashboard.
+ */
 const Projects = () => {
     const [success, setSuccess] = useState(false);
-    const [view, setView] = useState('register'); 
- 
+
+
+    // Estado para controlar a visão atual (registro ou lista de usuários)
+    const [view, setView] = useState('lista');
+
 
     const handleDismiss = () => {
         setSuccess(false);
@@ -26,6 +32,7 @@ const Projects = () => {
     };
     const [isDashboardVisible, setIsDashboardVisible] = useState(true);
 
+    // Se o dashboard estiver visível, será ocultado e vice-versa.
     const toggleVisibility = () => {
         setIsDashboardVisible(prevState => !prevState);
     };
@@ -41,7 +48,7 @@ const Projects = () => {
                 <Header />
             </div>
             <div className={`main ${isDashboardVisible ? 'visible' : 'hidden'}`}>
-            <div className="container-button">
+                <div className="container-button">
                     <button className="button" onClick={handleListUsers}>
                         ─ Listar todos os Projetos
                     </button>

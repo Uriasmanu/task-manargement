@@ -3,8 +3,17 @@ import useProject from '../../../hooks/useProjects';
 import './_projectForm.scss';
 import Sucesso from '../../../components/sucesso/sucesso';
 
+
+/**
+ * Componente para criar um novo projeto.
+ * Utiliza o hook `useProject` para criar um projeto e lidar com erros.
+ */
 const ProjectForm = () => {
+
+    // Hook personalizado para criar um projeto e capturar possíveis erros
     const { createProject, error } = useProject();
+
+    // Estados para armazenar os dados do formulário e feedbacks
     const [name, setName] = useState('');
     const [descricao, setDescription] = useState('');
     const [showError, setShowError] = useState(false);
@@ -24,9 +33,12 @@ const ProjectForm = () => {
 
     useEffect(() => {
         if (showError) {
+            // Define um temporizador para ocultar a mensagem de erro após 2 segundos
             const timer = setTimeout(() => {
                 setShowError(false);
             }, 2000);
+
+            // Limpa o temporizador se o componente for desmontado ou showError mudar
             return () => clearTimeout(timer);
         }
     }, [showError]);
