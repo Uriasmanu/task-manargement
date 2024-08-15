@@ -17,7 +17,7 @@ import useAuth from '../../hooks/useAuth';
  */
 const Header = () => {
     const navigate = useNavigate();
-    const { logout: logoutUser } = useAuth(); // Importa a função de logout do hook useAuth
+    const { logout: logoutUser } = useAuth(); 
 
     const handleNavigation = (path) => {
         navigate(path);
