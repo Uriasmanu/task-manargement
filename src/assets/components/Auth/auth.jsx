@@ -9,10 +9,7 @@ const Auth = () => {
   const { login: loginUser, error } = useAuth();  
   const navigate = useNavigate();
 
-   // Remover 'authToken' do localStorage
-   useEffect(() => {
-    localStorage.removeItem('authToken');
-  }, []);
+
 
   const handleLogin = async (e) => {
     e.preventDefault();

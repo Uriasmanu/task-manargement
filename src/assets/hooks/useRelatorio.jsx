@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-
 /**
  * Hook personalizado para buscar e calcular relatórios de tempo de tarefas.
  * Faz a requisição para a API, calcula o tempo total diário e mensal das tarefas,
  * e gerencia os estados de carregamento e erro.
  *
- * @param {string} url - URL da API para buscar os dados (opcional, padrão é um URL específico para TimeTracker).
+ * @param {string} id - ID da tarefa para filtrar (opcional).
  * @returns {Object} Objeto contendo:
  *   - {Array} data - Dados das tarefas retornados pela API.
  *   - {boolean} loading - Indica se os dados estão sendo carregados.
@@ -15,22 +14,23 @@ import axios from 'axios';
  *   - {number} dailyTime - Tempo total das tarefas do dia atual em horas.
  *   - {number} monthlyTime - Tempo total das tarefas do mês atual em horas.
  */
-const useRelatorio = (url = 'https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/TimeTracker') => {
+const useRelatorio = (id) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [dailyTime, setDailyTime] = useState(0);
   const [monthlyTime, setMonthlyTime] = useState(0);
+  
+  const baseUrl = 'https://create-api-dfanctb3bhg4acgb.eastus-01.azurewebsites.net/api/TimeTracker';
 
-
-  //Função para buscar os dados das tarefas e calcular o tempo total diário e mensal.
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(url);
+        // Ajusta a URL se o id for fornecido
+        const requestUrl = id ? `${baseUrl}/${id}` : baseUrl;
+        const response = await axios.get(requestUrl);
         const tasks = response.data;
-        setData(tasks);
 
         // Função para calcular o tempo total de uma lista de tarefas
         const calculateTotalTime = (tasks) => {
@@ -56,6 +56,7 @@ const useRelatorio = (url = 'https://create-api-dfanctb3bhg4acgb.eastus-01.azure
         // Calcula o tempo total diário e mensal e atualiza os estados correspondentes
         setDailyTime(calculateTotalTime(dailyTasks));
         setMonthlyTime(calculateTotalTime(monthlyTasks));
+        setData(tasks);
       } catch (error) {
         setError(error);
       } finally {
@@ -64,7 +65,7 @@ const useRelatorio = (url = 'https://create-api-dfanctb3bhg4acgb.eastus-01.azure
     };
 
     fetchData();
-  }, [url]);
+  }, [id]);
 
   return { data, loading, error, dailyTime, monthlyTime };
 };

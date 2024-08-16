@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import MenuMobile from '../../components/MenuMobile/MenuMobile';
 import useRelatorio from '../../hooks/useRelatorio';
+import useTimeTrackers from '../../hooks/useTimeTrackers';
 
 /**
  * Componente que exibe dados do relatório e gerencia a visibilidade do dashboard.
@@ -15,19 +16,15 @@ import useRelatorio from '../../hooks/useRelatorio';
  */
 
 const Dashboard = () => {
-    // Obtém o usuário do contexto de autenticação
     const { user } = useContext(AuthContext);
-
-    // Estados para armazenar o payload do token, estado de carregamento e visibilidade do dashboard
-    const [payload, setPayload] = useState(null); // Armazena o payload decodificado do token
+    const [payload, setPayload] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isDashboardVisible, setIsDashboardVisible] = useState(true);
-    const { data, loading: relatorioLoading, error, dailyTime, monthlyTime } = useRelatorio();
-
-    /**
-     * Efeito colateral para decodificar o token JWT e definir o payload.
-     * Executa quando o usuário muda.
-     */
+    const [showContent, setShowContent] = useState(false); // Novo estado para controle do atraso
+    const [showLoadingText, setShowLoadingText] = useState(true); // Novo estado para controle do texto de carregamento
+    const { collaborators } = useTimeTrackers();
+    const [userTime, setUserTime] = useState(null);
+  
     useEffect(() => {
         if (user && user.token) {
             try {
@@ -43,17 +40,35 @@ const Dashboard = () => {
         }
     }, [user]);
 
-    /**
-     * Efeito colateral para recarregar a página se o usuário não estiver autenticado.
-     * Executa quando o usuário muda.
-     */
     useEffect(() => {
-        if (!user) {
-            window.location.reload();
+        if (payload && collaborators) {
+            // Verifica se existe um colaborador com o nome correspondente ao login em payload
+            const foundCollaborator = collaborators.find(collaborator => collaborator.name === payload.login);
+            
+            if (foundCollaborator) {
+                // Se encontrado, define o userTime com o ID do colaborador encontrado
+                setUserTime(foundCollaborator.id);
+            } else {
+                // Se não encontrado, loga um erro ou execute outra ação
+                console.error('Erro: Colaborador não encontrado.');
+            }
         }
-    }, [user]);
+    }, [payload, collaborators]);
 
-    if (loading || relatorioLoading) {
+    const { loading: relatorioLoading, error, dailyTime, monthlyTime } = useRelatorio(userTime);
+
+    useEffect(() => {
+        if (!loading && !relatorioLoading) {
+            // Define o tempo de espera para mostrar o conteúdo
+            const timer = setTimeout(() => {
+                setShowLoadingText(false); // Oculta o texto de carregamento
+                setShowContent(true); // Mostra o conteúdo
+            }, 3000);
+            return () => clearTimeout(timer); // Limpa o timer se o componente for desmontado
+        }
+    }, [loading, relatorioLoading]);
+
+    if (loading || relatorioLoading || showLoadingText) {
         return <p>Carregando...</p>;
     }
 
@@ -70,8 +85,8 @@ const Dashboard = () => {
     };
 
     // Função para formatar o tempo em horas e minutos
-    const formatoTempo = (houras) => {
-        const totalMinutos = Math.round(houras * 60);
+    const formatoTempo = (horas) => {
+        const totalMinutos = Math.round(horas * 60);
         const hoursPart = Math.floor(totalMinutos / 60);
         const minutesPart = totalMinutos % 60;
         return `${String(hoursPart).padStart(2, '0')}h${String(minutesPart).padStart(2, '0')}`;
@@ -88,43 +103,47 @@ const Dashboard = () => {
                 <Header />
             </div>
             <div className={`main ${isDashboardVisible ? 'visible' : 'hidden'}`}>
-                <div className='apresentacao'>
-                    <div className='chamada'>
-                        <h2>Olá, {payload ? payload.login : 'Carregando...'}</h2>
-                        <p>Rastreie o progresso do projeto aqui. Você está quase alcançando um objetivo</p>
-                    </div>
-                    <Dia />
-                </div>
+                {showContent && ( // Exibe o conteúdo somente após o atraso
+                    <>
+                        <div className='apresentacao'>
+                            <div className='chamada'>
+                                <h2>Olá, {payload ? payload.login : 'Carregando...'}</h2>
+                                <p>Rastreie o progresso do projeto aqui. Você está quase alcançando um objetivo</p>
+                            </div>
+                            <Dia />
+                        </div>
 
-                <div className="container-indicadores">
-                    {/* Adicione indicadores se necessário */}
-                </div>
+                        <div className="container-indicadores">
+                            {/* Adicione indicadores se necessário */}
+                        </div>
 
-                <div className="card-tempo">
-                    <div className="card">
-                        <div className="card-content">
-                            <div className="card-top">
-                                <span className="card-title">
-                                    <img src={relogio} alt="Ícone de relógio" />
-                                </span>
-                                <h3>Tempo Gasto hoje.</h3>
+                        <div className="card-tempo">
+                            <div className="card">
+                                <div className="card-content">
+                                    <div className="card-top">
+                                        <span className="card-title">
+                                            <img src={relogio} alt="Ícone de relógio" />
+                                        </span>
+                                        <h3>Tempo Gasto hoje.</h3>
+                                    </div>
+                                </div>
+                                <p>{formatoTempo(dailyTime)}</p>
+                            </div>
+
+                            <div className="card">
+                                <div className="card-content">
+                                    <div className="card-top">
+                                        <span className="card-title">
+                                            <img src={relogio} alt="Ícone de relógio" />
+                                        </span>
+                                        <h3>Tempo Gasto este mês.</h3>
+                                    </div>
+                                </div>
+                                <p>{formatoTempo(monthlyTime)}</p>
                             </div>
                         </div>
-                        <p>{formatoTempo(dailyTime)}</p>
-                    </div>
-
-                    <div className="card">
-                        <div className="card-content">
-                            <div className="card-top">
-                                <span className="card-title">
-                                    <img src={relogio} alt="Ícone de relógio" />
-                                </span>
-                                <h3>Tempo Gasto este mês.</h3>
-                            </div>
-                        </div>
-                        <p>{formatoTempo(monthlyTime)}</p>
-                    </div>
-                </div>
+                    </>
+                )}
             </div>
         </div>
     );
